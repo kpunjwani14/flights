@@ -1,8 +1,44 @@
 import React from 'react';
-import { Navbar, Form, Row, Col, Card, Button, InputGroup, FormControl, Dropdown } from 'react-bootstrap';
+import { Navbar, Form, Col, Card, Button, InputGroup, FormControl, Dropdown } from 'react-bootstrap';
 import './Homepage.css';
 
 class HomePage extends React.Component {
+    constructor() {
+        super()
+        this.state = {
+            validated: false,
+            adult: 1,
+            child: 0,
+            infant: 0,
+            placeTo: '',
+            placeFrom: '',
+            dateOf: '',
+            isValid: false,
+            economy: '',
+            dateTo: '',
+            tripType: ''
+
+
+        }
+        this.handleSubmit = this.handleSubmit.bind(this)
+    }
+    handleSubmit(event) {
+
+        const form = event.currentTarget;
+
+        if (form.checkValidity() === false) {
+
+            event.stopPropagation();
+        }
+        else
+            this.setState({ isValid: true })
+
+        event.preventDefault();
+        this.setState({ validated: true }, () => {
+            console.log(this.state)
+        })
+
+    }
     render() {
         return (
             <div>
@@ -21,12 +57,14 @@ class HomePage extends React.Component {
 
                 <section>
                     <h1>Flights</h1>
-
+                    {
+                        this.state.isValid && <h1>You are validated</h1>
+                    }
 
                     <Card className='card'>
                         <Card.Body>
-                            <Form>
-                                <Form.Row>
+                            <Form noValidate validated={this.state.validated} onSubmit={this.handleSubmit}>
+                                <Form.Row className="row">
                                     <Col xs="auto" className="my-2">
                                         <Form.Label className="mr-sm-1" htmlFor="inlineFormCustomSelect" srOnly>
                                         </Form.Label>
@@ -35,10 +73,12 @@ class HomePage extends React.Component {
                                             className="mr-sm-2"
                                             id="inlineFormCustomSelect"
                                             custom
+                                            required
+                                            onChange={(e) => { this.setState({ tripType: e.target.value }) }}
+
                                         >
-                                            <option value="Round Trip">Round Trip </option>
-                                            <option value="One way">One way</option>
-                                            <option value="Multi-city">Multi-city</option>
+                                            <option value="One Way">One Way</option>
+                                            <option value="Round-Trip">Round Trip</option>
                                         </Form.Control>
                                     </Col>
 
@@ -51,25 +91,39 @@ class HomePage extends React.Component {
                                             </Dropdown.Toggle>
 
                                             <Dropdown.Menu>
-                                                <ul>
-                                                    <li className='list'>
-                                                        <label style={{ marginRight: '30px' }} for="adults">Adults</label>
-                                                        <input type="number" placeholder='0' id="tentacles" name="tentacles"
-                                                            min="1" max="5"></input>
-                                                    </li>
 
-                                                    <li className='list'>
-                                                        <label style={{ marginRight: '15px' }} for="children">Children</label>
-                                                        <input type="number" placeholder='0' id="tentacles" name="tentacles"
-                                                            min="0" max="5"></input>
-                                                    </li>
 
-                                                    <li>
-                                                        <label style={{ marginRight: '26px' }} for="infants">Infants</label>
-                                                        <input type="number" placeholder='0' id="tentacles" name="tentacles"
-                                                            min="0" max="5"></input>
-                                                    </li>
-                                                </ul>
+                                                <Form.Row>
+                                                    <Col xs={5}>
+                                                        <Form.Label className="lab" for="adults">Adults</Form.Label>
+                                                    </Col>
+                                                    <Col xs={6}>
+                                                        <Form.Control type="number" id="adults" name="adults"
+                                                            min="1" max="5" placeholder="1" value={this.state.adult} required onChange={(e) => { this.setState({ adult: e.target.value }) }}></Form.Control>
+                                                    </Col>
+
+                                                </Form.Row>
+                                                <Form.Row>
+                                                    <Col xs={5}>
+                                                        <Form.Label className="lab" for="children" name="children">Children</Form.Label>
+                                                    </Col>
+                                                    <Col xs={6}>
+                                                        <Form.Control value={this.state.child} onChange={(e) => { this.setState({ child: e.target.value }) }} type="number" id="tentacles" name="tentacles"
+                                                            min="0" max="5"></Form.Control>
+                                                    </Col>
+                                                </Form.Row>
+
+                                                <Form.Row>
+                                                    <Col xs={5}>
+                                                        <Form.Label className="lab" for="infants" name="infants">Infants</Form.Label>
+                                                    </Col>
+                                                    <Col xs={6}>
+                                                        <Form.Control value={this.state.infant} onChange={(e) => { this.setState({ infant: e.target.value }) }} type="number" id="tentacles" name="tentacles"
+                                                            min="0" max="5"></Form.Control>
+                                                    </Col>
+                                                </Form.Row>
+
+
                                             </Dropdown.Menu>
                                         </Dropdown>
                                     </Col>
@@ -82,6 +136,9 @@ class HomePage extends React.Component {
                                             className="mr-sm-2"
                                             id="inlineFormCustomSelect"
                                             custom
+                                            required
+                                            onChange={(e) => { this.setState({ economy: e.target.value }) }}
+
                                         >
                                             <option value="Economy">Economy</option>
                                             <option value="Premium economy">Premium economy</option>
@@ -92,10 +149,11 @@ class HomePage extends React.Component {
                                 </Form.Row>
 
 
-                                <Form.Row>
-                                    <Col xs={4}>
+                                <Form.Row className="row">
+                                    <Col lg={5}>
                                         <InputGroup className="mb-2">
-                                            <FormControl placeholder="Leaving From" />
+                                            <FormControl placeholder="Leaving From (City, State/Country)" required
+                                                onChange={(e) => { this.setState({ placeFrom: e.target.value }) }} />
                                             <InputGroup.Append>
                                                 <InputGroup.Text><svg width=".7em" height=".8em" viewBox="0 0 16 16" class="bi bi-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                     <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -103,9 +161,10 @@ class HomePage extends React.Component {
                                             </InputGroup.Append>
                                         </InputGroup>
                                     </Col>
-                                    <Col xs={4}>
+                                    <Col lg={5}>
                                         <InputGroup className="mb-2">
-                                            <FormControl placeholder="Going To" />
+                                            <FormControl placeholder="Going To (City, State/Country)" required
+                                                onChange={(e) => { this.setState({ placeTo: e.target.value }) }} />
                                             <InputGroup.Append>
                                                 <InputGroup.Text><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-geo-alt" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                     <path fill-rule="evenodd" d="M12.166 8.94C12.696 7.867 13 6.862 13 6A5 5 0 0 0 3 6c0 .862.305 1.867.834 2.94.524 1.062 1.234 2.12 1.96 3.07A31.481 31.481 0 0 0 8 14.58l.208-.22a31.493 31.493 0 0 0 1.998-2.35c.726-.95 1.436-2.008 1.96-3.07zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
@@ -115,22 +174,52 @@ class HomePage extends React.Component {
                                         </InputGroup>
 
                                     </Col>
-                                    <Col>
-                                        <Form.Group controlId="date from">
-                                            <Form.Control type="date" name="date from" placeholder="Date" />
-                                        </Form.Group>
+                                </Form.Row>
+                                <Form.Row className="row">
+                                    <Col md={4}>
+                                        
+
+                                            <Form.Control
+                                                onChange={(e) => { this.setState({ dateOf: e.target.value }) }}
+                                                className='dates' required type="date" name="date from" placeholder="One Way"
+                                                min={new Date().toISOString().split("T")[0]}
+                                            />
+
+
+                                       
                                     </Col>
+                                    {this.state.tripType === 'Round-Trip' && 
+                                        <>
+                                        <Col md={.2}  >
+                                        <svg  width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                               <path   fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-11.5.5a.5.5 0 0 1 0-1h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5z" />
+                                           </svg>
+                                       </Col>
+                                        <Col md={4}>
+                                           
+                                            <Form.Group  controlId="date to">
+
+                                                <Form.Control
+                                                    onChange={(e) => { this.setState({ dateTo: e.target.value }) }}
+                                                    className='dates' required type="date" name="date to"
+                                                    min={this.state.dateOf}
+                                                />
+
+
+                                            </Form.Group>
+                                        </Col></>}
+
+                                </Form.Row>
+                                <Form.Row>
                                     <Col>
-                                        <Form.Group controlId="date to">
-                                            <Form.Control type="date" name="date to" placeholder="Date" />
-                                        </Form.Group>
+                                        <Button className='button' type='submit' variant="outline-primary"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+                                            <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+                                        </svg> Search</Button>{' '}
                                     </Col>
                                 </Form.Row>
                             </Form>
-                            <Button className='button' variant="outline-primary"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
-                                <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
-                            </svg> Search</Button>{' '}
+
                         </Card.Body>
                     </Card>
                 </section>
