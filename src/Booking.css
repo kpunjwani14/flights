@@ -9,11 +9,12 @@ div > h4{
 }
 
 .bi-clock {
-    margin: 4px 6px;
+    margin-bottom: 4px;
+    margin-right: 3px;
 }
 
 .bi-check2{
-    margin-left: 10px;
+    margin-left: 12px;
     margin-right: 2px;
 }
 
