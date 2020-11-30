@@ -1,0 +1,35 @@
+.container {
+    width: 90%;
+    height: 750px;
+    margin: 20px auto;
+}
+
+div > h4{
+    margin-bottom: 20px;
+}
+
+.bi-clock {
+    margin-bottom: 4px;
+    margin-right: 3px;
+}
+
+.bi-check2{
+    margin-left: 12px;
+    margin-right: 2px;
+}
+
+.card {
+    margin-top: 18px;
+}
+
+.bi-arrow-right{
+    margin-left: 5px;
+}
+
+.message {
+    margin-top: 10px;
+}
+
+.label{
+    font-size: 15px;
+}

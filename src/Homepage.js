@@ -54,7 +54,6 @@ class HomePage extends React.Component {
       Flights
     </Navbar.Brand>
                 </Navbar>
-
                 <section>
                     <h1>Flights</h1>
                     {
