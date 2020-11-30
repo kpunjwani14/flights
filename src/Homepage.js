@@ -42,18 +42,7 @@ class HomePage extends React.Component {
     render() {
         return (
             <div>
-                <Navbar bg="light" variant="light">
-                    <Navbar.Brand href="#home">
-                        <img
-                            alt=""
-                            src="favicon.ico"
-                            width="30"
-                            height="30"
-                            className="d-inline-block align-top"
-                        />{' '}
-      Flights
-    </Navbar.Brand>
-                </Navbar>
+              
                 <section>
                     <h1>Flights</h1>
                     {
