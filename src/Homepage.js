@@ -18,10 +18,8 @@ class HomePage extends React.Component {
       Flights
     </Navbar.Brand>
                 </Navbar>
-
                 <section>
                     <h1>Flights</h1>
-
 
                     <Card className='card'>
                         <Card.Body>
@@ -36,7 +34,6 @@ class HomePage extends React.Component {
                                             id="inlineFormCustomSelect"
                                             custom
                                         >
-                                            <option value="Round Trip">Round Trip </option>
                                             <option value="One way">One way</option>
                                             <option value="Multi-city">Multi-city</option>
                                         </Form.Control>
@@ -51,25 +48,23 @@ class HomePage extends React.Component {
                                             </Dropdown.Toggle>
 
                                             <Dropdown.Menu>
-                                                <ul>
-                                                    <li className='list'>
-                                                        <label style={{ marginRight: '30px' }} for="adults">Adults</label>
-                                                        <input type="number" placeholder='0' id="tentacles" name="tentacles"
-                                                            min="1" max="5"></input>
-                                                    </li>
+                                                <li className='list'>
+                                                    <label style={{ display: 'block', textAlign: 'center' }} for="adults">Adults</label>
+                                                    <input type="number" placeholder='0' id="tentacles" name="tentacles"
+                                                        min="1" max="5"></input>
+                                                </li>
 
-                                                    <li className='list'>
-                                                        <label style={{ marginRight: '15px' }} for="children">Children</label>
-                                                        <input type="number" placeholder='0' id="tentacles" name="tentacles"
-                                                            min="0" max="5"></input>
-                                                    </li>
+                                                <li className='list'>
+                                                    <label for="children">Children</label>
+                                                    <input type="number" placeholder='0' id="tentacles" name="tentacles"
+                                                        min="0" max="5"></input>
+                                                </li>
 
-                                                    <li>
-                                                        <label style={{ marginRight: '26px' }} for="infants">Infants</label>
-                                                        <input type="number" placeholder='0' id="tentacles" name="tentacles"
-                                                            min="0" max="5"></input>
-                                                    </li>
-                                                </ul>
+                                                <li className='list'>
+                                                    <label for="infants">Infants</label>
+                                                    <input type="number" placeholder='0' id="tentacles" name="tentacles"
+                                                        min="0" max="5"></input>
+                                                </li>
                                             </Dropdown.Menu>
                                         </Dropdown>
                                     </Col>
