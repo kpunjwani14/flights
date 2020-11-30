@@ -1,6 +1,6 @@
 import React from 'react';
 import './Booking.css';
-import { Navbar, Accordion, Card, Alert, Form, Row, Col, Button, InputGroup } from 'react-bootstrap';
+import { Nav, Navbar, Accordion, Card, Alert, Form, Row, Col, Button, InputGroup } from 'react-bootstrap';
 
 class Booking extends React.Component {
     render() {
@@ -17,6 +17,14 @@ class Booking extends React.Component {
                         />{' '}
       Flights
     </Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="mr-auto">
+                            <Nav.Link href="#home">Book</Nav.Link>
+                            <Nav.Link href="#my-flights">My Flights</Nav.Link>
+                            <Nav.Link href="#check-in">Check-in</Nav.Link>
+                        </Nav>
+                    </Navbar.Collapse>
                 </Navbar>
 
                 <div className='container'>
