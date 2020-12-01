@@ -1,18 +1,20 @@
 section {
     width: 90%;
     
-    background-image: url('https://images.unsplash.com/photo-1483304528321-0674f0040030?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80');
+    /* background-image: url('https://images.unsplash.com/photo-1483304528321-0674f0040030?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80');
     background-size: cover;
-    background-position: center;
+    background-position: center; */
     /* margin: 0 auto; */
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: flex-start;
     border-radius: 8px;
     margin: 20px auto;
-    padding-top:17%;
+    
 }
-
+.car{
+height:285px;
+}
 
 h1 {
     font-size: 55px;
@@ -44,7 +46,14 @@ h1 {
 /* li {
     list-style-type: none;
 } */
-
+.car-text{
+    font-family: EB Garamond,serif  ;
+    color:black;
+    
+}
+.car-heading{
+    font-size:70px;
+}
 #dropdown-basic {
     color: black;
     background-color: white;
