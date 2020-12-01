@@ -3,86 +3,16 @@ import './Booking.css';
 import { Nav, Navbar, Accordion, Card, Alert, Form, Row, Col, Button, InputGroup } from 'react-bootstrap';
 
 class Booking extends React.Component {
-    render() {
-        return (
-            <div>
-                <Navbar bg="light" variant="light">
-                    <Navbar.Brand href="#home">
-                        <img
-                            alt=""
-                            src="favicon.ico"
-                            width="30"
-                            height="30"
-                            className="d-inline-block align-top"
-                        />{' '}
-      Flights
-    </Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="mr-auto">
-                            <Nav.Link href="#home">Book</Nav.Link>
-                            <Nav.Link href="#my-flights">My Flights</Nav.Link>
-                            <Nav.Link href="#check-in">Check-in</Nav.Link>
-                        </Nav>
-                    </Navbar.Collapse>
-                </Navbar>
-
-                <div className='container'>
-                    <h4>Secure booking - only takes a few minutes!</h4>
-
-                    <Alert variant='primary'>
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-clock" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm8-7A8 8 0 1 1 0 8a8 8 0 0 1 16 0z" />
-                            <path fill-rule="evenodd" d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z" />
-                        </svg>
-                        Prices not guaranteed until booked
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill- rule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
-                        </svg>
-                        Free cancellation within 24 hours of booking!
-                    </Alert>
-
-                    <Accordion>
-                        <Card>
-                            <Accordion.Toggle as={Card.Header} eventKey="0">
-                                Promotions
-                                <svg style={{ marginLeft: '5px' }} width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M3.204 5L8 10.481 12.796 5H3.204zm-.753.659l4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
-                                </svg>
-                            </Accordion.Toggle>
-                            <Accordion.Collapse eventKey="0">
-                                <Card.Body>
-                                    Promo Code: holiday
-                                    <Form.Group>
-                                        <InputGroup style={{ marginTop: '10px' }}>
-                                            <Form.Control className='col-lg-2' size="lg" type="text" placeholder="Promo Code" />
-                                            <InputGroup.Append>
-                                                <Button variant="dark">Apply</Button>{' '}
-                                            </InputGroup.Append>
-                                        </InputGroup>
-                                    </Form.Group>
-                                </Card.Body>
-                            </Accordion.Collapse>
-                        </Card>
-                    </Accordion>
-
-                    <Card className='card'>
-                        <Card.Header>
-                            <span>
-                                <svg style={{ marginBottom: '8px', marginRight: '5px' }} width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z" />
-                                    <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                                    <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z" />
-                                </svg>
-                                <h4 style={{ display: "inline" }}>Who's traveling?</h4>
-                            </span>
-                        </Card.Header>
-                        <Card.Body>
+     travelingCard(){
+         var elem=[]
+        for(var x=0;x<5;x++){
+            elem.push(
+            <Card.Body>
                             <Card.Title>
-                                <h6><b>Traveler 1: Adult, primary contact</b></h6>
+                                <h6><b>Traveler {x}: Adult, primary contact</b></h6>
                             </Card.Title>
                             <Card.Text>
-                                <p style={{ fontSize: '15px' }}>Traveler names must match government-issued photo ID exactly.</p>
+                                {x==0&&<p style={{ fontSize: '15px' }}>Traveler names must match government-issued photo ID exactly.</p>}
                                 <Form>
                                     <Form.Row>
                                         <Form.Group className='col-md-3' as={Col} controlId="formGridEmail">
@@ -269,13 +199,75 @@ class Booking extends React.Component {
                                         </Form.Group>
                                     </Form.Row>
                                 </Form>
-                                <hr></hr>
+                                {x==0&&
                                 <div>
                                     <p><b>Seat selection</b></p>
                                     <p style={{ fontSize: '15px' }}>Your specific seat will be assigned by the airline before your flight.</p>
-                                </div>
+                                </div>}
                             </Card.Text>
+                            {x!=4&& <hr style={{height:'1px'}}></hr>}
                         </Card.Body>
+                       )
+        }
+        return( elem)
+            }
+    render() {
+        return (
+            <div>
+                
+
+                <div className='container'>
+                    <h4>Secure booking - only takes a few minutes!</h4>
+
+                    <Alert variant='primary'>
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-clock" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm8-7A8 8 0 1 1 0 8a8 8 0 0 1 16 0z" />
+                            <path fill-rule="evenodd" d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z" />
+                        </svg>
+                        Prices not guaranteed until booked
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill- rule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                        </svg>
+                        Free cancellation within 24 hours of booking!
+                    </Alert>
+
+                    <Accordion>
+                        <Card>
+                            <Accordion.Toggle as={Card.Header} eventKey="0">
+                                Promotions
+                                <svg style={{ marginLeft: '5px' }} width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M3.204 5L8 10.481 12.796 5H3.204zm-.753.659l4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
+                                </svg>
+                            </Accordion.Toggle>
+                            <Accordion.Collapse eventKey="0">
+                                <Card.Body>
+                                    Promo Code: holiday
+                                    <Form.Group>
+                                        <InputGroup style={{ marginTop: '10px' }}>
+                                            <Form.Control className='col-lg-2' size="lg" type="text" placeholder="Promo Code" />
+                                            <InputGroup.Append>
+                                                <Button variant="dark">Apply</Button>{' '}
+                                            </InputGroup.Append>
+                                        </InputGroup>
+                                    </Form.Group>
+                                </Card.Body>
+                            </Accordion.Collapse>
+                        </Card>
+                    </Accordion>
+
+                    <Card className='card'>
+                        <Card.Header>
+                            <span>
+                                <svg style={{ marginBottom: '8px', marginRight: '5px' }} width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z" />
+                                    <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                    <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z" />
+                                </svg>
+                                <h4 style={{ display: "inline" }}>Who's traveling?</h4>
+                            </span>
+                        </Card.Header>
+                        
+                         {this.travelingCard()}   
                     </Card>
 
                     <Card>
