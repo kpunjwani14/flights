@@ -10,9 +10,11 @@ section {
     justify-content: flex-start;
     border-radius: 8px;
     margin: 20px auto;
-    padding-top:17%;
+    
 }
-
+.car{
+height:285px;
+}
 
 h1 {
     font-size: 55px;
@@ -44,7 +46,14 @@ h1 {
 /* li {
     list-style-type: none;
 } */
-
+.car-text{
+    font-family: EB Garamond,serif  ;
+    color:black;
+    
+}
+.car-heading{
+    font-size:70px;
+}
 #dropdown-basic {
     color: black;
     background-color: white;

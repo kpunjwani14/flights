@@ -44,19 +44,21 @@ class HomePage extends React.Component {
             <div>
               
               
-                <Carousel class='carousel'>
-                        <Carousel.Item>
+                <Carousel >
+                        <Carousel.Item className='car'>
                             <img
                                 className="d-block w-100"
                                 src="https://images.unsplash.com/photo-1530521954074-e64f6810b32d?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80"
                                 alt="First slide"
                             />
+                            
                             <Carousel.Caption>
-                                <h2 style={{ fontFamily: "'EB Garamond', serif" }}>Check-in</h2>
-                                <h4 style={{ fontFamily: "'EB Garamond', serif" }}>Check-in at your convenience and print your boarding pass from the comfort of your home.</h4>
+                                <h2 className='car-text car-heading'>Check-in</h2>
+                                <h4 className='car-text'>Check-in at your convenience and print your boarding pass from the comfort of your home.</h4>
                             </Carousel.Caption>
+                           
                         </Carousel.Item>
-                        <Carousel.Item>
+                        <Carousel.Item className='car'>
                             <img
                                 className="d-block w-100"
                                 src="https://images.unsplash.com/photo-1483450388369-9ed95738483c?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80"
@@ -64,11 +66,11 @@ class HomePage extends React.Component {
                             />
 
                             <Carousel.Caption>
-                                <h2 style={{ fontFamily: "'EB Garamond', serif " }}>COVID-19</h2>
-                                <h3 style={{ fontFamily: "'EB Garamond', serif " }}>Risk of COVID-19 exposure on our flights is almost non-existent</h3>
+                                <h2 className='car-text car-heading'>COVID-19</h2>
+                                <h3 className='car-text'>Risk of COVID-19 exposure on our flights is almost non-existent</h3>
                             </Carousel.Caption>
                         </Carousel.Item>
-                        <Carousel.Item>
+                        <Carousel.Item className='car'>
                             <img
                                 className="d-block w-100"
                                 src="https://images.unsplash.com/photo-1518317507427-5346735246ab?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80"
