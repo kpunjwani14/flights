@@ -5,6 +5,7 @@ import Homepage from './Homepage'
 import Booking from './Booking'
 import Navigation from './Navigation'
 import Search from './Search'
+import Checkin from './Checkin'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
@@ -15,15 +16,15 @@ function App() {
         <Navigation />
         <Switch>
           <Route path="/" exact component={Homepage} />
-
+          <Route path="/checkin" exact component={Checkin}/>
           <Route path="/checkout" exact component={Booking} />
-          <Route path="/search" exact component={Booking} />
+          <Route path="/search" exact component={Search} />
 
 
         </Switch>
 
       </Router>
-      <Search />
+     
     </div>
   );
 }

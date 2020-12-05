@@ -39,6 +39,18 @@ class HomePage extends React.Component {
         })
 
     }
+    getDate(){
+        const x=new Date()
+        var mon=(x.getMonth()+1)%13 
+        var dat=x.getDate()
+        if(dat<10)
+            dat='0'+dat
+        if(mon<10)
+            mon='0'+mon
+        
+        return x.getFullYear()+'-'+(mon)+'-'+(dat)
+        
+    }
     render() {
         return (
             <div>
@@ -167,10 +179,9 @@ class HomePage extends React.Component {
                                           onChange={(e) => { this.setState({ economy: e.target.value }) }}
 
                                       >
-                                          <option value="Economy">Economy</option>
-                                          <option value="Premium economy">Premium economy</option>
-                                          <option value="Business">Business</option>
-                                          <option value="First">First</option>
+                                          <option value="economy">Economy</option>
+                                          <option value="business">Business</option>
+                                          
                                       </Form.Control>
                                   </Col>
                               </Form.Row>
@@ -209,7 +220,7 @@ class HomePage extends React.Component {
                                           <Form.Control
                                               onChange={(e) => { this.setState({ dateOf: e.target.value }) }}
                                               className='dates' required type="date" name="date from" placeholder="One Way"
-                                              min={new Date().toISOString().split("T")[0]}
+                                              min={this.getDate()}
                                           />
 
 
