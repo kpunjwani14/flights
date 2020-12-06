@@ -16,7 +16,7 @@ function App() {
         <Navigation />
         <Switch>
           <Route path="/" exact component={Homepage} />
-          <Route path="/checkin" exact component={Checkin}/>
+          <Route path="/checkin" exact component={Checkin} />
           <Route path="/checkout" exact component={Booking} />
           <Route path="/search" exact component={Search} />
 
@@ -24,7 +24,7 @@ function App() {
         </Switch>
 
       </Router>
-     
+
     </div>
   );
 }
