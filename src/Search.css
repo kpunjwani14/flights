@@ -3,3 +3,12 @@
     height: 750px;
     margin: 20px auto;
 }
+.text{
+    
+    text-align: center;
+    
+}
+.card{
+    margin-bottom: 15px;
+    width:100%
+}
