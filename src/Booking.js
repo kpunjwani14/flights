@@ -19,200 +19,201 @@ class Booking extends React.Component {
         var elem = []
         for (var x = 0; x < 5; x++) {
             elem.push(
-                <Card.Body>
+                <Card.Body className={x == 0 ? 'padding2' : 'padding1'}>
                     <Card.Title>
-                        <h6><b>Traveler {x}: Adult, primary contact</b></h6>
+                        <h6><b>Traveler {x + 1}: Adult, primary contact</b></h6>
                     </Card.Title>
                     <Card.Text>
                         {x == 0 && <p style={{ fontSize: '15px' }}>Traveler names must match government-issued photo ID exactly.</p>}
-                        <Form>
-                            <Form.Row>
-                                <Form.Group className='col-md-3' as={Col} controlId="formGridEmail">
-                                    <Form.Label>First Name</Form.Label>
-                                    <Form.Control type="text" />
-                                </Form.Group>
 
-                                <Form.Group className='col-md-3' as={Col} controlId="formGridEmail">
-                                    <Form.Label>Middle Name</Form.Label>
-                                    <Form.Control type="text" />
-                                </Form.Group>
-
-                                <Form.Group className='col-md-3' as={Col} controlId="formGridEmail">
-                                    <Form.Label>Last Name</Form.Label>
-                                    <Form.Control type="text" />
-                                </Form.Group>
-                            </Form.Row>
-
-                            <Form.Label>Gender</Form.Label>
-                            <Form.Group>
-                                <Form.Check inline name='gender' type="radio" label='Male' aria-label="radio 1" />
-                                <Form.Check inline name='gender' type="radio" label='Female' aria-label="radio 1" />
+                        <Form.Row>
+                            <Form.Group className='col-md-3' as={Col} controlId="formGridEmail">
+                                <Form.Label>First Name</Form.Label>
+                                <Form.Control required type="text" minlength="2" maxlength="20" />
                             </Form.Group>
 
-                            <Form.Label>Date of birth</Form.Label>
-                            <Form.Row>
-                                <Form.Group controlId="exampleForm.ControlSelect1">
-                                    <Form.Control custom required as="select">
-                                        <option value=''>Month</option>
-                                        <option value='1'>01-Jan</option>
-                                        <option value='2'>02-Feb</option>
-                                        <option value='3'>03-Mar</option>
-                                        <option value='4'>04-Apr</option>
-                                        <option value='5'>05-May</option>
-                                        <option value='6'>06-Jun</option>
-                                        <option value='7'>07-Jul</option>
-                                        <option value='8'>08-Aug</option>
-                                        <option value='9'>09-Sep</option>
-                                        <option value='10'>10-Oct</option>
-                                        <option value='11'>11-Nov</option>
-                                        <option value='12'>12-Dec</option>
-                                    </Form.Control>
-                                </Form.Group>
+                            <Form.Group className='col-md-3' as={Col} controlId="formGridEmail">
+                                <Form.Label>Middle Name</Form.Label>
+                                <Form.Control type="text" />
+                            </Form.Group>
 
-                                <Form.Group style={{ marginLeft: '8px' }} controlId="exampleForm.ControlSelect1">
-                                    <Form.Control custom required as="select">
-                                        <option value="" selected="">Day</option>
-                                        <option value="01">01</option>
-                                        <option value="02">02</option>
-                                        <option value="03">03</option>
-                                        <option value="04">04</option>
-                                        <option value="05">05</option>
-                                        <option value="06">06</option>
-                                        <option value="07">07</option>
-                                        <option value="08">08</option>
-                                        <option value="09">09</option>
-                                        <option value="10">10</option>
-                                        <option value="11">11</option>
-                                        <option value="12">12</option>
-                                        <option value="13">13</option>
-                                        <option value="14">14</option>
-                                        <option value="15">15</option>
-                                        <option value="16">16</option>
-                                        <option value="17">17</option>
-                                        <option value="18">18</option>
-                                        <option value="19">19</option>
-                                        <option value="20">20</option>
-                                        <option value="21">21</option>
-                                        <option value="22">22</option>
-                                        <option value="23">23</option>
-                                        <option value="24">24</option>
-                                        <option value="25">25</option>
-                                        <option value="26">26</option>
-                                        <option value="27">27</option>
-                                        <option value="28">28</option>
-                                        <option value="29">29</option>
-                                        <option value="30">30</option>
-                                        <option value="31">31</option>
+                            <Form.Group className='col-md-3' as={Col} controlId="formGridEmail">
+                                <Form.Label>Last Name</Form.Label>
+                                <Form.Control required type="text" minlength="2" maxlength="20" />
+                            </Form.Group>
+                        </Form.Row>
 
-                                    </Form.Control>
-                                </Form.Group>
+                        <Form.Label>Gender</Form.Label>
+                        <Form.Group>
+                            <Form.Check required inline name={`gender${x}`} type="radio" label='Male' />
+                            <Form.Check inline name={`gender${x}`} type="radio" label='Female' />
+                        </Form.Group>
 
-                                <Form.Group style={{ marginLeft: '8px' }}>
-                                    <Form.Control custom required as="select">
-                                        <option value="" selected="">Year</option>
-                                        <option value="2020">2020</option>
-                                        <option value="2019">2019</option>
-                                        <option value="2018">2018</option>
-                                        <option value="2017">2017</option>
-                                        <option value="2016">2016</option>
-                                        <option value="2015">2015</option>
-                                        <option value="2014">2014</option>
-                                        <option value="2013">2013</option>
-                                        <option value="2012">2012</option>
-                                        <option value="2011">2011</option>
-                                        <option value="2010">2010</option>
-                                        <option value="2009">2009</option>
-                                        <option value="2008">2008</option>
-                                        <option value="2007">2007</option>
-                                        <option value="2006">2006</option>
-                                        <option value="2005">2005</option>
-                                        <option value="2004">2004</option>
-                                        <option value="2003">2003</option>
-                                        <option value="2002">2002</option>
-                                        <option value="2001">2001</option>
-                                        <option value="2000">2000</option>
-                                        <option value="1999">1999</option>
-                                        <option value="1998">1998</option>
-                                        <option value="1997">1997</option>
-                                        <option value="1996">1996</option>
-                                        <option value="1995">1995</option>
-                                        <option value="1994">1994</option>
-                                        <option value="1993">1993</option>
-                                        <option value="1992">1992</option>
-                                        <option value="1991">1991</option>
-                                        <option value="1990">1990</option>
-                                        <option value="1989">1989</option>
-                                        <option value="1988">1988</option>
-                                        <option value="1987">1987</option>
-                                        <option value="1986">1986</option>
-                                        <option value="1985">1985</option>
-                                        <option value="1984">1984</option>
-                                        <option value="1983">1983</option>
-                                        <option value="1982">1982</option>
-                                        <option value="1981">1981</option>
-                                        <option value="1980">1980</option>
-                                        <option value="1979">1979</option>
-                                        <option value="1978">1978</option>
-                                        <option value="1977">1977</option>
-                                        <option value="1976">1976</option>
-                                        <option value="1975">1975</option>
-                                        <option value="1974">1974</option>
-                                        <option value="1973">1973</option>
-                                        <option value="1972">1972</option>
-                                        <option value="1971">1971</option>
-                                        <option value="1970">1970</option>
-                                        <option value="1969">1969</option>
-                                        <option value="1968">1968</option>
-                                        <option value="1967">1967</option>
-                                        <option value="1966">1966</option>
-                                        <option value="1965">1965</option>
-                                        <option value="1964">1964</option>
-                                        <option value="1963">1963</option>
-                                        <option value="1962">1962</option>
-                                        <option value="1961">1961</option>
-                                        <option value="1960">1960</option>
-                                        <option value="1959">1959</option>
-                                        <option value="1958">1958</option>
-                                        <option value="1957">1957</option>
-                                        <option value="1956">1956</option>
-                                        <option value="1955">1955</option>
-                                        <option value="1954">1954</option>
-                                        <option value="1953">1953</option>
-                                        <option value="1952">1952</option>
-                                        <option value="1951">1951</option>
-                                        <option value="1950">1950</option>
-                                        <option value="1949">1949</option>
-                                        <option value="1948">1948</option>
-                                        <option value="1947">1947</option>
-                                        <option value="1946">1946</option>
-                                        <option value="1945">1945</option>
-                                        <option value="1944">1944</option>
-                                        <option value="1943">1943</option>
-                                        <option value="1942">1942</option>
-                                        <option value="1941">1941</option>
-                                        <option value="1940">1940</option>
-                                        <option value="1939">1939</option>
-                                        <option value="1938">1938</option>
-                                        <option value="1937">1937</option>
-                                        <option value="1936">1936</option>
-                                        <option value="1935">1935</option>
-                                        <option value="1934">1934</option>
-                                        <option value="1933">1933</option>
-                                        <option value="1932">1932</option>
-                                        <option value="1931">1931</option>
-                                        <option value="1930">1930</option>
-                                        <option value="1929">1929</option>
-                                        <option value="1928">1928</option>
-                                        <option value="1927">1927</option>
-                                        <option value="1926">1926</option>
-                                        <option value="1925">1925</option>
-                                        <option value="1924">1924</option>
-                                    </Form.Control>
-                                </Form.Group>
-                            </Form.Row>
-                        </Form>
-                        {x == 0 &&
+                        <Form.Label>Date of birth</Form.Label>
+                        <Form.Row>
+                            <Form.Group controlId="exampleForm.ControlSelect1">
+                                <Form.Control custom required as="select">
+                                    <option value=''>Month</option>
+                                    <option value='1'>01-Jan</option>
+                                    <option value='2'>02-Feb</option>
+                                    <option value='3'>03-Mar</option>
+                                    <option value='4'>04-Apr</option>
+                                    <option value='5'>05-May</option>
+                                    <option value='6'>06-Jun</option>
+                                    <option value='7'>07-Jul</option>
+                                    <option value='8'>08-Aug</option>
+                                    <option value='9'>09-Sep</option>
+                                    <option value='10'>10-Oct</option>
+                                    <option value='11'>11-Nov</option>
+                                    <option value='12'>12-Dec</option>
+                                </Form.Control>
+                            </Form.Group>
+
+                            <Form.Group style={{ marginLeft: '8px' }} controlId="exampleForm.ControlSelect1">
+                                <Form.Control custom required as="select">
+                                    <option value="" selected="">Day</option>
+                                    <option value="01">01</option>
+                                    <option value="02">02</option>
+                                    <option value="03">03</option>
+                                    <option value="04">04</option>
+                                    <option value="05">05</option>
+                                    <option value="06">06</option>
+                                    <option value="07">07</option>
+                                    <option value="08">08</option>
+                                    <option value="09">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>
+
+                                </Form.Control>
+                            </Form.Group>
+
+                            <Form.Group style={{ marginLeft: '8px' }}>
+                                <Form.Control custom required as="select">
+                                    <option value="" selected="">Year</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2019">2019</option>
+                                    <option value="2018">2018</option>
+                                    <option value="2017">2017</option>
+                                    <option value="2016">2016</option>
+                                    <option value="2015">2015</option>
+                                    <option value="2014">2014</option>
+                                    <option value="2013">2013</option>
+                                    <option value="2012">2012</option>
+                                    <option value="2011">2011</option>
+                                    <option value="2010">2010</option>
+                                    <option value="2009">2009</option>
+                                    <option value="2008">2008</option>
+                                    <option value="2007">2007</option>
+                                    <option value="2006">2006</option>
+                                    <option value="2005">2005</option>
+                                    <option value="2004">2004</option>
+                                    <option value="2003">2003</option>
+                                    <option value="2002">2002</option>
+                                    <option value="2001">2001</option>
+                                    <option value="2000">2000</option>
+                                    <option value="1999">1999</option>
+                                    <option value="1998">1998</option>
+                                    <option value="1997">1997</option>
+                                    <option value="1996">1996</option>
+                                    <option value="1995">1995</option>
+                                    <option value="1994">1994</option>
+                                    <option value="1993">1993</option>
+                                    <option value="1992">1992</option>
+                                    <option value="1991">1991</option>
+                                    <option value="1990">1990</option>
+                                    <option value="1989">1989</option>
+                                    <option value="1988">1988</option>
+                                    <option value="1987">1987</option>
+                                    <option value="1986">1986</option>
+                                    <option value="1985">1985</option>
+                                    <option value="1984">1984</option>
+                                    <option value="1983">1983</option>
+                                    <option value="1982">1982</option>
+                                    <option value="1981">1981</option>
+                                    <option value="1980">1980</option>
+                                    <option value="1979">1979</option>
+                                    <option value="1978">1978</option>
+                                    <option value="1977">1977</option>
+                                    <option value="1976">1976</option>
+                                    <option value="1975">1975</option>
+                                    <option value="1974">1974</option>
+                                    <option value="1973">1973</option>
+                                    <option value="1972">1972</option>
+                                    <option value="1971">1971</option>
+                                    <option value="1970">1970</option>
+                                    <option value="1969">1969</option>
+                                    <option value="1968">1968</option>
+                                    <option value="1967">1967</option>
+                                    <option value="1966">1966</option>
+                                    <option value="1965">1965</option>
+                                    <option value="1964">1964</option>
+                                    <option value="1963">1963</option>
+                                    <option value="1962">1962</option>
+                                    <option value="1961">1961</option>
+                                    <option value="1960">1960</option>
+                                    <option value="1959">1959</option>
+                                    <option value="1958">1958</option>
+                                    <option value="1957">1957</option>
+                                    <option value="1956">1956</option>
+                                    <option value="1955">1955</option>
+                                    <option value="1954">1954</option>
+                                    <option value="1953">1953</option>
+                                    <option value="1952">1952</option>
+                                    <option value="1951">1951</option>
+                                    <option value="1950">1950</option>
+                                    <option value="1949">1949</option>
+                                    <option value="1948">1948</option>
+                                    <option value="1947">1947</option>
+                                    <option value="1946">1946</option>
+                                    <option value="1945">1945</option>
+                                    <option value="1944">1944</option>
+                                    <option value="1943">1943</option>
+                                    <option value="1942">1942</option>
+                                    <option value="1941">1941</option>
+                                    <option value="1940">1940</option>
+                                    <option value="1939">1939</option>
+                                    <option value="1938">1938</option>
+                                    <option value="1937">1937</option>
+                                    <option value="1936">1936</option>
+                                    <option value="1935">1935</option>
+                                    <option value="1934">1934</option>
+                                    <option value="1933">1933</option>
+                                    <option value="1932">1932</option>
+                                    <option value="1931">1931</option>
+                                    <option value="1930">1930</option>
+                                    <option value="1929">1929</option>
+                                    <option value="1928">1928</option>
+                                    <option value="1927">1927</option>
+                                    <option value="1926">1926</option>
+                                    <option value="1925">1925</option>
+                                    <option value="1924">1924</option>
+                                </Form.Control>
+                            </Form.Group>
+                        </Form.Row>
+
+                        {x == 4 &&
                             <div>
+                                <hr></hr>
                                 <p><b>Seat selection</b></p>
                                 <p style={{ fontSize: '15px' }}>Your specific seat will be assigned by the airline before your flight.</p>
                             </div>}
@@ -240,7 +241,7 @@ class Booking extends React.Component {
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill- rule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
                         </svg>
-                        Free cancellation within 24 hours of booking!
+                        Free cancellation!
                     </Alert>
 
                     <Accordion>
@@ -253,35 +254,43 @@ class Booking extends React.Component {
                             </Accordion.Toggle>
                             <Accordion.Collapse eventKey="0">
                                 <Card.Body>
-                                    Promo Code: holiday
-                                    <Form.Group>
-                                        <InputGroup style={{ marginTop: '10px' }}>
-                                            <Form.Control className='col-lg-2' size="lg" type="text" placeholder="Promo Code" />
-                                            <InputGroup.Append>
-                                                <Button variant="dark">Apply</Button>{' '}
-                                            </InputGroup.Append>
-                                        </InputGroup>
-                                    </Form.Group>
+                                    <Row>
+                                        <Col>
+                                            <Form.Group>
+                                                <InputGroup style={{ marginTop: '10px' }}>
+                                                    <Form.Control className='col-lg-4' size="lg" type="text" placeholder="Promo Code" />
+                                                    <InputGroup.Append>
+                                                        <Button variant="dark">Apply</Button>{' '}
+                                                    </InputGroup.Append>
+                                                </InputGroup>
+                                            </Form.Group>
+                                        </Col>
+                                        <Col>
+                                            <b>Price summary</b>
+                                            <p>Traveler 1: $314.20 <br /> Traveler 2: $314.20</p>
+                                        </Col>
+                                    </Row>
                                 </Card.Body>
                             </Accordion.Collapse>
                         </Card>
                     </Accordion>
-
-                    <Card className='card'>
-                        <Card.Header>
-                            <span>
-                                <svg style={{ marginBottom: '8px', marginRight: '5px' }} width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z" />
-                                    <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                                    <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z" />
-                                </svg>
-                                <h4 style={{ display: "inline" }}>Who's traveling?</h4>
-                            </span>
-                        </Card.Header>
-
-                        {this.travelingCard()}
-                    </Card>
                     <Form noValidate validated>
+
+                        <Card className='card'>
+                            <Card.Header>
+                                <span>
+                                    <svg style={{ marginBottom: '8px', marginRight: '5px' }} width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z" />
+                                        <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                        <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z" />
+                                    </svg>
+                                    <h4 style={{ display: "inline" }}>Who's traveling?</h4>
+                                </span>
+                            </Card.Header>
+
+                            {this.travelingCard()}
+                        </Card>
+
                         <Card>
                             <Card.Header>
                                 <span>
@@ -1009,7 +1018,7 @@ class Booking extends React.Component {
 
                                     <Form.Group controlId="formGridAddress1">
                                         <Form.Label>Phone number</Form.Label>
-                                        <Form.Control className='col-lg-12' placeholder="123-456-7890" />
+                                        <Form.Control minlength='10' maxlength='10' required className='col-lg-12' placeholder="1234567890" />
                                     </Form.Group>
                                 </Form.Row>
 
@@ -1036,10 +1045,11 @@ class Booking extends React.Component {
                                 <Card.Text>
                                     <Form.Row>
                                         <Form.Group className='col-lg-5' as={Col}>
-                                            
+
                                             <Form.Control
                                                 required
                                                 type="text"
+                                                minlength='2' maxlength='20'
                                             />
                                         </Form.Group>
                                     </Form.Row>
@@ -1050,6 +1060,7 @@ class Booking extends React.Component {
                                             <Form.Control
                                                 required
                                                 type="text"
+                                                minlength="15" maxlength="19"
                                             />
                                         </Form.Group>
                                     </Form.Row>
@@ -1107,6 +1118,7 @@ class Booking extends React.Component {
                                             <Form.Control className='col-md-1'
                                                 required
                                                 type="text"
+                                                minlength="3" maxlength="3"
                                             />
                                         </Form.Group>
                                     </Form.Row>
@@ -1115,9 +1127,9 @@ class Booking extends React.Component {
 
                                     <Form.Group>
                                         <Form.Row>
-                                        <Col>
-                                        <Form.Label>Country/Territory</Form.Label>
-                                        </Col> 
+                                            <Col>
+                                                <Form.Label>Country/Territory</Form.Label>
+                                            </Col>
                                         </Form.Row>
                                         <Form.Control custom required as='select' className='col-lg-6'>
                                             <option value="">Select</option>
@@ -1361,7 +1373,7 @@ class Booking extends React.Component {
 
                                     <Form.Group controlId="formGridAddress1">
                                         <Form.Label>Billing address 1</Form.Label>
-                                        <Form.Control className='col-lg-6' placeholder="123 Main St" />
+                                        <Form.Control required className='col-lg-6' placeholder="123 Main St" />
                                     </Form.Group>
 
                                     <Form.Group controlId="formGridAddress2">
@@ -1372,12 +1384,12 @@ class Booking extends React.Component {
                                     <Form.Row>
                                         <Form.Group className='col-lg-3' as={Col} controlId="formGridCity">
                                             <Form.Label>City</Form.Label>
-                                            <Form.Control />
+                                            <Form.Control minlength='2' maxlength='20' required />
                                         </Form.Group>
 
                                         <Form.Group className='col-sm-2' as={Col} controlId="formGridState">
                                             <Form.Label>State</Form.Label>
-                                            <Form.Control as="select" required custom>
+                                            <Form.Control as="select">
                                                 <option value="">Select</option>
                                                 <option value="AL">AL</option><option value="AK">AK</option><option value="AZ">AZ</option><option value="AR">AR</option><option value="CA">CA</option><option value="CO">CO</option><option value="CT">CT</option><option value="DE">DE</option><option value="DC">DC</option><option value="FL">FL</option><option value="GA">GA</option><option value="HI">HI</option><option value="ID">ID</option><option value="IL">IL</option><option value="IN">IN</option><option value="IA">IA</option><option value="KS">KS</option><option value="KY">KY</option><option value="LA">LA</option><option value="ME">ME</option><option value="MD">MD</option><option value="MA">MA</option><option value="MI">MI</option><option value="MN">MN</option><option value="MS">MS</option><option value="MO">MO</option><option value="MT">MT</option><option value="NE">NE</option><option value="NV">NV</option><option value="NH">NH</option><option value="NJ">NJ</option><option value="NM">NM</option><option value="NY">NY</option><option value="NC">NC</option><option value="ND">ND</option><option value="OH">OH</option><option value="OK">OK</option><option value="OR">OR</option><option value="PA">PA</option><option value="RI">RI</option><option value="SC">SC</option><option value="SD">SD</option><option value="TN">TN</option><option value="TX">TX</option><option value="UT">UT</option><option value="VT">VT</option><option value="VA">VA</option><option value="WA">WA</option><option value="WV">WV</option><option value="WI">WI</option><option value="WY">WY</option><option value="AS">AS</option><option value="FM">FM</option><option value="GU">GU</option><option value="MH">MH</option><option value="MP">MP</option><option value="PW">PW</option><option value="PR">PR</option><option value="VI">VI</option><option value="AA">AA</option><option value="AE">AE</option><option value="AP">AP</option>
                                             </Form.Control>
@@ -1385,7 +1397,7 @@ class Booking extends React.Component {
 
                                         <Form.Group className='col-sm-2' as={Col} controlId="formGridZip">
                                             <Form.Label>Zip</Form.Label>
-                                            <Form.Control />
+                                            <Form.Control minlength='5' maxlength='5' />
                                         </Form.Group>
                                     </Form.Row>
 
@@ -1394,48 +1406,77 @@ class Booking extends React.Component {
                             </Card.Body>
                         </Card>
 
-                        <Card style={{ marginBottom: '10px' }} className='card'>
-                            <Card.Header>
-                                <span>
-                                    <svg style={{ marginBottom: '8px', marginRight: '5px' }} width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-clipboard-check" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
-                                        <path fill-rule="evenodd" d="M9.5 1h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3zm4.354 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
-                                    </svg>
-                                    <h4 style={{ display: "inline" }}>Review and book your trip</h4>
-                                </span>
-                            </Card.Header>
-                            <Card.Body>
-                                <Card.Title>
-                                    <h6>Please Read!</h6>
-                                </Card.Title>
-                                <Card.Text>
-                                    <ol>
-                                        <li>Review your trip details to make sure the dates and times are correct.</li>
-                                        <li>Check your spelling. Flight passenger names must match government-issued photo ID exactly.</li>
-                                        <li>
-                                            Review the terms of your booking:
+                        <Row>
+                            <Col>
+                                <Card>
+                                    <Card.Header>
+                                        <span>
+                                            <svg style={{ marginBottom: '8px', marginRight: '5px' }} width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cursor" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103zM2.25 8.184l3.897 1.67a.5.5 0 0 1 .262.263l1.67 3.897L12.743 3.52 2.25 8.184z" />
+                                            </svg>
+                                            <h4 style={{ display: "inline" }}>Flight info</h4>
+                                        </span>
+                                    </Card.Header>
+                                    <Card.Body>
+                                        <Card.Title>One way flight</Card.Title>
+                                        <Card.Subtitle className="mb-2 text-muted">2 tickets: 2 adults </Card.Subtitle>
+                                        <hr />
+                                        <b>Houston (IAH) to Buffalo (BUF)</b>
+                                        <p>Tuesday, Dec 12 <br /> 6:23am - 1:01pm (5h 38m) <br />1h 30m stop in CLT</p>
+
+                                        <hr />
+                                        <b>Your price summary</b>
+                                        <p>Traveler 1: $314.20 <br /> Traveler 2: $314.20</p>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                            <Col>
+                                <Card style={{ marginBottom: '10px' }} className='card'>
+                                    <Card.Header>
+                                        <span>
+                                            <svg style={{ marginBottom: '8px', marginRight: '5px' }} width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-clipboard-check" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                                                <path fill-rule="evenodd" d="M9.5 1h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3zm4.354 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+                                            </svg>
+                                            <h4 style={{ display: "inline" }}>Review and book your trip</h4>
+                                        </span>
+                                    </Card.Header>
+                                    <Card.Body>
+                                        <Card.Title>
+                                            <h6>Please Read!</h6>
+                                        </Card.Title>
+                                        <Card.Text>
+                                            <ol>
+                                                <li>Review your trip details to make sure the dates and times are correct.</li>
+                                                <li>Check your spelling. Flight passenger names must match government-issued photo ID exactly.</li>
+                                                <li>
+                                                    Review the terms of your booking:
                                         <ul>
-                                                <li>Airline assigns seats</li>
-                                                <li>Bring a carry-on bag</li>
-                                                <li>Pay to bring a checked bag</li>
-                                            </ul>
-                                        </li>
-                                    </ol>
-                                    <p>By selecting to complete this booking, I acknowledge that I have read and accept the above Rules & Restrictions.</p>
-                                    <Button size="lg" type='submit' variant="outline-success">Complete Booking
+                                                        <li>Airline assigns seats</li>
+                                                        <li>Bring a carry-on bag</li>
+                                                        <li>Pay to bring a checked bag</li>
+                                                        <li>To reschedule your flight, cancel your current one and book a new one again</li>
+                                                    </ul>
+                                                </li>
+                                            </ol>
+                                            <p>By selecting to complete this booking, I acknowledge that I have read and accept the above Rules & Restrictions.</p>
+                                            <Button size="lg" type='submit' variant="outline-success">Complete Booking
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
-                                        </svg>
-                                    </Button>{' '}
-                                    <div className='message'>
-                                        <svg style={{ marginBottom: '5px', marginRight: '5px' }} width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-lock" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" d="M11.5 8h-7a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1zm-7-1a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-7zm0-3a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z" />
-                                        </svg>
-                                        <p style={{ fontSize: '14px', display: "inline" }}>We use secure transmission and encrypted storage to protect your personal information.</p>
-                                    </div>
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
+                                                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+                                                </svg>
+                                            </Button>{' '}
+                                            <div className='message'>
+                                                <svg style={{ marginBottom: '5px', marginRight: '5px' }} width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-lock" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M11.5 8h-7a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1zm-7-1a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-7zm0-3a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z" />
+                                                </svg>
+                                                <p style={{ fontSize: '14px', display: "inline" }}>We use secure transmission and encrypted storage to protect your personal information.</p>
+                                            </div>
+                                        </Card.Text>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        </Row>
+
                     </Form>
                 </div>
 

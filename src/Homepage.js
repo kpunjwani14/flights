@@ -174,7 +174,7 @@ class HomePage extends React.Component {
                                                 </Form.Row>
                                                 <Form.Row>
                                                     <Col xs={5}>
-                                                        <Form.Label className="lab" for="children" name="children">Children</Form.Label>
+                                                        <Form.Label className="lab" for="children" name="children">Kids</Form.Label>
                                                     </Col>
                                                     <Col xs={6}>
                                                         <Form.Control value={this.state.params.child} onChange={(e) => { this.setState(prevState => ({ params: { ...prevState.params, child: e.target.value } })) }} type="number" id="tentacles" name="tentacles"

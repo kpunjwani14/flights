@@ -33,3 +33,12 @@ div > h4{
 .label{
     font-size: 15px;
 }
+
+.padding1 {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.padding2 {
+    padding-bottom: 0px;
+}

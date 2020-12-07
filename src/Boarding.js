@@ -16,7 +16,7 @@ class Boarding extends React.Component {
                         <Card.Body>
                             <Card.Title>Boarding</Card.Title>
                             <Card.Text style={{ fontSize: '15px' }}>
-                                Check-in is available starting 24 hours before your scheduled departure.
+                                Boarding starts 30 minutes before your scheduled departure.
       </Card.Text>
                             <Form>
                                 <Form.Row>
