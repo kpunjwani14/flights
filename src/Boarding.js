@@ -1,8 +1,8 @@
 import React from 'react';
-import './Checkin.css';
+import './Boarding.css';
 import { Form, Row, Col, Button, Card } from 'react-bootstrap';
 
-class Checkin extends React.Component {
+class Boarding extends React.Component {
     render() {
         return (
             <div>
@@ -14,7 +14,7 @@ class Checkin extends React.Component {
                     <Card border="light" style={{ width: '98%', marginBottom: '10px' }}>
                         {/* <Card.Header>Header</Card.Header> */}
                         <Card.Body>
-                            <Card.Title>Check-in</Card.Title>
+                            <Card.Title>Boarding</Card.Title>
                             <Card.Text style={{ fontSize: '15px' }}>
                                 Check-in is available starting 24 hours before your scheduled departure.
       </Card.Text>
@@ -31,7 +31,7 @@ class Checkin extends React.Component {
                                     </Form.Group>
 
                                     <Form.Group className='col-md-4' as={Col} controlId="formGridPassword">
-                                        <Form.Label>Last name</Form.Label>
+                                        <Form.Label>Boarding name</Form.Label>
                                         <Form.Control type="text" />
                                     </Form.Group>
 
@@ -51,4 +51,4 @@ class Checkin extends React.Component {
     }
 }
 
-export default Checkin
+export default Boarding

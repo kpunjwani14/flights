@@ -68,9 +68,9 @@ class HomePage extends React.Component {
             param += (i + '=' + j[i] + '&')
         }
 
-        param=param.slice(0, -1)
+        param = param.slice(0, -1)
 
-       
+
         return encodeURI(param)
     }
     render() {
@@ -167,8 +167,8 @@ class HomePage extends React.Component {
                                                         <Form.Label className="lab" for="adults">Adults</Form.Label>
                                                     </Col>
                                                     <Col xs={6}>
-                                                        <Form.Control type="number" id="adults" name="adults" 
-                                                            min="1" max="5"  value={this.state.params.adult} required onChange={(e) => { this.setState(prevState => ({ params: { ...prevState.params, adult: e.target.value } })) }}></Form.Control>
+                                                        <Form.Control type="number" id="adults" name="adults"
+                                                            min="1" max="5" value={this.state.params.adult} required onChange={(e) => { this.setState(prevState => ({ params: { ...prevState.params, adult: e.target.value } })) }}></Form.Control>
                                                     </Col>
 
                                                 </Form.Row>
@@ -250,7 +250,7 @@ class HomePage extends React.Component {
 
                                         <Form.Control
                                             onChange={(e) => { this.setState(prevState => ({ params: { ...prevState.params, dateFrom: e.target.value } })) }}
-                                            className='dates'  required type="date" name="date from" placeholder="One Way"
+                                            className='dates' required type="date" name="date from" placeholder="One Way"
                                             min={this.getDate()}
                                         />
 

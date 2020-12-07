@@ -53,19 +53,19 @@ class Booking extends React.Component {
                             <Form.Row>
                                 <Form.Group controlId="exampleForm.ControlSelect1">
                                     <Form.Control custom required as="select">
-                                        <option>Month</option>
-                                        <option>01-Jan</option>
-                                        <option>02-Feb</option>
-                                        <option>03-Mar</option>
-                                        <option>04-Apr</option>
-                                        <option>05-May</option>
-                                        <option>06-Jun</option>
-                                        <option>07-Jul</option>
-                                        <option>08-Aug</option>
-                                        <option>09-Sep</option>
-                                        <option>10-Oct</option>
-                                        <option>11-Nov</option>
-                                        <option>12-Dec</option>
+                                        <option value=''>Month</option>
+                                        <option value='1'>01-Jan</option>
+                                        <option value='2'>02-Feb</option>
+                                        <option value='3'>03-Mar</option>
+                                        <option value='4'>04-Apr</option>
+                                        <option value='5'>05-May</option>
+                                        <option value='6'>06-Jun</option>
+                                        <option value='7'>07-Jul</option>
+                                        <option value='8'>08-Aug</option>
+                                        <option value='9'>09-Sep</option>
+                                        <option value='10'>10-Oct</option>
+                                        <option value='11'>11-Nov</option>
+                                        <option value='12'>12-Dec</option>
                                     </Form.Control>
                                 </Form.Group>
 
@@ -1057,46 +1057,46 @@ class Booking extends React.Component {
                                     <Form.Label>Expiration date</Form.Label>
                                     <Form.Row>
                                         <Form.Group controlId="exampleForm.ControlSelect1">
-                                            <Form.Control required custom as="select">
-                                                
-                                                <option>01-Jan</option>
-                                                <option>02-Feb</option>
-                                                <option>03-Mar</option>
-                                                <option>04-Apr</option>
-                                                <option>05-May</option>
-                                                <option>06-Jun</option>
-                                                <option>07-Jul</option>
-                                                <option>08-Aug</option>
-                                                <option>09-Sep</option>
-                                                <option>10-Oct</option>
-                                                <option>11-Nov</option>
-                                                <option>12-Dec</option>
+                                            <Form.Control custom required as="select">
+                                                <option value=''>Month</option>
+                                                <option value='1'>01-Jan</option>
+                                                <option value='2'>02-Feb</option>
+                                                <option value='3'>03-Mar</option>
+                                                <option value='4'>04-Apr</option>
+                                                <option value='5'>05-May</option>
+                                                <option value='6'>06-Jun</option>
+                                                <option value='7'>07-Jul</option>
+                                                <option value='8'>08-Aug</option>
+                                                <option value='9'>09-Sep</option>
+                                                <option value='10'>10-Oct</option>
+                                                <option value='11'>11-Nov</option>
+                                                <option value='12'>12-Dec</option>
                                             </Form.Control>
                                         </Form.Group>
 
                                         <Form.Group style={{ marginLeft: '8px' }}>
-                                            <Form.Control  custom as="select">
-                                                
-                                                <option>2020</option>
-                                                <option>2021</option>
-                                                <option>2022</option>
-                                                <option>2023</option>
-                                                <option>2024</option>
-                                                <option>2025</option>
-                                                <option>2026</option>
-                                                <option>2027</option>
-                                                <option>2028</option>
-                                                <option>2029</option>
-                                                <option>2030</option>
-                                                <option>2031</option>
-                                                <option>2032</option>
-                                                <option>2033</option>
-                                                <option>2034</option>
-                                                <option>2035</option>
-                                                <option>2036</option>
-                                                <option>2037</option>
-                                                <option>2038</option>
-                                                <option>2039</option>
+                                            <Form.Control custom required as="select">
+                                                <option value=''>Year</option>
+                                                <option value='2020'>2020</option>
+                                                <option value='2021'>2021</option>
+                                                <option value='2022'>2022</option>
+                                                <option value='2023'>2023</option>
+                                                <option value='2024'>2024</option>
+                                                <option value='2025'>2025</option>
+                                                <option value='2026'>2026</option>
+                                                <option value='2027'>2027</option>
+                                                <option value='2028'>2028</option>
+                                                <option value='2029'>2029</option>
+                                                <option value='2030'>2030</option>
+                                                <option value='2031'>2031</option>
+                                                <option value='2032'>2032</option>
+                                                <option value='2033'>2033</option>
+                                                <option value='2034'>2034</option>
+                                                <option value='2035'>2035</option>
+                                                <option value='2036'>2036</option>
+                                                <option value='2037'>2037</option>
+                                                <option value='2038'>2038</option>
+                                                <option value='2039'>2039</option>
                                             </Form.Control>
                                         </Form.Group>
                                     </Form.Row>
