@@ -58,10 +58,32 @@ class HomePage extends React.Component {
         return x.getFullYear() + '-' + (mon) + '-' + (dat)
 
     }
+    getQueryParams() {
+        const j = this.state.params
+        let param = ''
+        if (this.state.tripType == 'Round-Trip')
+            param += ('dateTo' + '=' + this.state.dateTo + '&')
+        for (let i in this.state.params) {
+
+            param += (i + '=' + j[i] + '&')
+        }
+
+        param = param.slice(0, -1)
+
+
+        return encodeURI(param)
+    }
     render() {
         return (
 
             <div>
+                {this.state.isValid && <Redirect
+                    to={{
+                        pathname: "/search",
+                        search: this.getQueryParams(),
+
+                    }}
+                />}
 
                 <Carousel >
                     <Carousel.Item className='car'>
@@ -120,7 +142,8 @@ class HomePage extends React.Component {
                                             id="inlineFormCustomSelect"
                                             custom
                                             required
-                                            onChange={(e) => { this.setState({ tripType: e.target.value }) }}
+                                            value={this.state.tripType}
+                                            onChange={(e) => { this.setState(prevState => ({ tripType: e.target.value })) }}
 
                                         >
                                             <option value="One Way">One Way</option>
@@ -129,14 +152,18 @@ class HomePage extends React.Component {
                                     </Col>
 
                                     <Col xs="auto" className="my-2">
-                                        <Dropdown>
-                                            <Dropdown.Toggle id="dropdown-basic">
+                                        <Dropdown  >
+                                            <Dropdown.Toggle id="dropdown-basic" >
                                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                     <path fill-rule="evenodd" d="M10 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
                                                 </svg>
                                             </Dropdown.Toggle>
 
-                                            <Dropdown.Menu>
+<<<<<<< HEAD
+                                        <Dropdown.Menu>
+=======
+                                            <Dropdown.Menu flip={false}>
+>>>>>>> dc98400615a641a8ed84fc3ac132beecc6cff219
 
 
                                                 <Form.Row>
@@ -145,7 +172,7 @@ class HomePage extends React.Component {
                                                     </Col>
                                                     <Col xs={6}>
                                                         <Form.Control type="number" id="adults" name="adults"
-                                                            min="1" max="5" placeholder="1" value={this.state.adult} required onChange={(e) => { this.setState({ adult: e.target.value }) }}></Form.Control>
+                                                            min="1" max="5" value={this.state.params.adult} required onChange={(e) => { this.setState(prevState => ({ params: { ...prevState.params, adult: e.target.value } })) }}></Form.Control>
                                                     </Col>
 
                                                 </Form.Row>
@@ -154,7 +181,7 @@ class HomePage extends React.Component {
                                                         <Form.Label className="lab" for="children" name="children">Children</Form.Label>
                                                     </Col>
                                                     <Col xs={6}>
-                                                        <Form.Control value={this.state.child} onChange={(e) => { this.setState({ child: e.target.value }) }} type="number" id="tentacles" name="tentacles"
+                                                        <Form.Control value={this.state.params.child} onChange={(e) => { this.setState(prevState => ({ params: { ...prevState.params, child: e.target.value } })) }} type="number" id="tentacles" name="tentacles"
                                                             min="0" max="5"></Form.Control>
                                                     </Col>
                                                 </Form.Row>
@@ -164,7 +191,7 @@ class HomePage extends React.Component {
                                                         <Form.Label className="lab" for="infants" name="infants">Infants</Form.Label>
                                                     </Col>
                                                     <Col xs={6}>
-                                                        <Form.Control value={this.state.infant} onChange={(e) => { this.setState({ infant: e.target.value }) }} type="number" id="tentacles" name="tentacles"
+                                                        <Form.Control value={this.state.params.infant} onChange={(e) => { this.setState(prevState => ({ params: { ...prevState.params, infant: e.target.value } })) }} type="number" id="tentacles" name="tentacles"
                                                             min="0" max="5"></Form.Control>
                                                     </Col>
                                                 </Form.Row>
@@ -183,10 +210,11 @@ class HomePage extends React.Component {
                                             id="inlineFormCustomSelect"
                                             custom
                                             required
-                                            onChange={(e) => { this.setState({ economy: e.target.value }) }}
+                                            value={this.state.params.econ}
+                                            onChange={(e) => { this.setState(prevState => ({ params: { ...prevState.params, econ: e.target.value } })) }}
 
                                         >
-                                            <option value="economy">Economy</option>
+                                            <option value="econ">Economy</option>
                                             <option value="business">Business</option>
 
                                         </Form.Control>
@@ -198,7 +226,7 @@ class HomePage extends React.Component {
                                     <Col lg={5}>
                                         <InputGroup className="mb-2">
                                             <FormControl placeholder="Leaving From (City, State/Country)" required
-                                                onChange={(e) => { this.setState({ placeFrom: e.target.value }) }} />
+                                                onChange={(e) => { this.setState(prevState => ({ params: { ...prevState.params, placeFrom: e.target.value } })) }} />
                                             <InputGroup.Append>
                                                 <InputGroup.Text><svg width=".7em" height=".8em" viewBox="0 0 16 16" class="bi bi-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                     <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -209,7 +237,7 @@ class HomePage extends React.Component {
                                     <Col lg={5}>
                                         <InputGroup className="mb-2">
                                             <FormControl placeholder="Going To (City, State/Country)" required
-                                                onChange={(e) => { this.setState({ placeTo: e.target.value }) }} />
+                                                onChange={(e) => { this.setState(prevState => ({ params: { ...prevState.params, placeTo: e.target.value } })) }} />
                                             <InputGroup.Append>
                                                 <InputGroup.Text><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-geo-alt" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                     <path fill-rule="evenodd" d="M12.166 8.94C12.696 7.867 13 6.862 13 6A5 5 0 0 0 3 6c0 .862.305 1.867.834 2.94.524 1.062 1.234 2.12 1.96 3.07A31.481 31.481 0 0 0 8 14.58l.208-.22a31.493 31.493 0 0 0 1.998-2.35c.726-.95 1.436-2.008 1.96-3.07zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
@@ -225,7 +253,7 @@ class HomePage extends React.Component {
 
 
                                         <Form.Control
-                                            onChange={(e) => { this.setState({ dateOf: e.target.value }) }}
+                                            onChange={(e) => { this.setState(prevState => ({ params: { ...prevState.params, dateFrom: e.target.value } })) }}
                                             className='dates' required type="date" name="date from" placeholder="One Way"
                                             min={this.getDate()}
                                         />
@@ -245,9 +273,9 @@ class HomePage extends React.Component {
                                                 <Form.Group controlId="date to">
 
                                                     <Form.Control
-                                                        onChange={(e) => { this.setState({ dateTo: e.target.value }) }}
+                                                        onChange={(e) => { this.setState(prevState => ({ dateTo: e.target.value })) }}
                                                         className='dates' required type="date" name="date to"
-                                                        min={this.state.dateOf}
+                                                        min={this.state.params.dateFrom}
                                                     />
 
 
