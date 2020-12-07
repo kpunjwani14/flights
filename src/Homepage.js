@@ -159,11 +159,7 @@ class HomePage extends React.Component {
                                                 </svg>
                                             </Dropdown.Toggle>
 
-<<<<<<< HEAD
-                                        <Dropdown.Menu>
-=======
                                             <Dropdown.Menu flip={false}>
->>>>>>> dc98400615a641a8ed84fc3ac132beecc6cff219
 
 
                                                 <Form.Row>
