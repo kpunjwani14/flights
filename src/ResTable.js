@@ -1,4 +1,4 @@
-import { Row, Col, Card, ListGroup } from 'react-bootstrap';
+import { Row, Col, Card, ListGroup,Button } from 'react-bootstrap';
 import React from 'react';
 
 import './Search.css'
@@ -6,10 +6,16 @@ import './Search.css'
 class ResTable extends React.Component {
     constructor(props) {
         super(props)
+        this.state={
+            activeVal:'',
+
+
+        }
     }
     getResults(results) {
         let flights = {}
         let res = []
+
         console.log(results);
         results.forEach(d => {
             if (!flights[d.flight_id])
@@ -22,6 +28,7 @@ class ResTable extends React.Component {
                 flights[d.flight_id]['stops'].push({ 'airport': d.airc, 'duartion': d.duration })
 
         });
+        
         for (let f in flights) {
             let x = flights[f]
 
@@ -41,15 +48,26 @@ class ResTable extends React.Component {
                         }) : 'None'}
                     </Col>
                     <Col>Price</Col>
+                    <Col xs={2}><Button size="sm" variant="outline-primary" active={f===this.props.act} value={f} onClick={e=>{this.props.setAct(this.props.type,e.target.value);console.log(e.target.value)}}>Select Flight</Button></Col>
+                   
                 </Row>
             </ListGroup.Item>)
         }
         console.log(flights)
-        return res
+        return (<>
+            
+            {res}
+            
+            </>
+            ) 
     }
     getHeader() {
         const header = ['Departure Airport', 'Arrival Airport', 'Stops', 'Price']
-        return (header.map(h => <Col><b>{h}</b></Col>))
+        return (
+            <>
+            {header.map(h => <Col><b>{h}</b></Col>)}
+            <Col xs={2}></Col>
+            </>)
     }
     render() {
         return (<div>
@@ -61,15 +79,7 @@ class ResTable extends React.Component {
                     <Card.Header><Row>{this.getHeader()}</Row></Card.Header>
 
                     {this.getResults(this.props.data)}
-                    <ListGroup.Item>
-                        <Row>
-                            <Col>Depart</Col>
-                            <Col>Arrive</Col>
-                            <Col>Stops</Col>
-
-                            <Col>Price</Col>
-                        </Row>
-                    </ListGroup.Item>
+                    
                 </ListGroup>
             </Card>
 
