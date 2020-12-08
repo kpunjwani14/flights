@@ -39,7 +39,7 @@ class Boarding extends React.Component {
                                 </Form.Row>
                                 <Form.Row>
                                     <Col>
-                                        <Button size="md" type="submit" className='button' variant="primary">Search flight</Button>
+                                        <Button size="md" type="submit" className='button' variant="primary">Board now!</Button>
                                     </Col>
                                 </Form.Row>
                             </Form>

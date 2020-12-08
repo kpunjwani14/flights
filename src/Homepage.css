@@ -21,7 +21,7 @@ h1 {
     font-size: 55px;
     text-align: center;
     color: #1a0742;
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'PT Sans', sans-serif;
 }
 
 .card { 
@@ -48,7 +48,7 @@ h1 {
     list-style-type: none;
 } */
 .car-text{
-    font-family: EB Garamond,serif  ;
+    font-family: 'PT Sans', sans-serif;
     color:black;
     
     
