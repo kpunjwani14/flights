@@ -1,7 +1,9 @@
 import React from 'react';
 import './Booking.css';
 import { Accordion, Card, Alert, Form, Row, Col, Button, InputGroup } from 'react-bootstrap';
-import {Redirect} from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
+import BookingModal from './BookingModal'
+
 class Booking extends React.Component {
     constructor(props) {
         super(props)
@@ -48,14 +50,14 @@ class Booking extends React.Component {
             }
             st[f] = x
 
-           
+
 
         }
         var y = this.state.params.get('flightIDB')
-        
+
         this.setState(prevState => (
             {
-                flightIDB: (y? y : prevState.flightIDB), 
+                flightIDB: (y ? y : prevState.flightIDB),
                 reqParams: {
                     ...prevState.reqParams,
                     ...st
@@ -286,7 +288,7 @@ class Booking extends React.Component {
 
             <div>
 
-                {this.state.isErr&&<Redirect to={{pathName:'/home'}}/>}
+                {this.state.isErr && <Redirect to={{ pathName: '/home' }} />}
                 <div className='container'>
                     <h4>Secure booking - only takes a few minutes!</h4>
 
@@ -1076,7 +1078,7 @@ class Booking extends React.Component {
 
                                     <Form.Group controlId="formGridAddress1">
                                         <Form.Label>Phone number</Form.Label>
-                                        <Form.Control minlength='10' maxlength='10' required className='col-lg-12' placeholder="1234567890" />
+                                        <Form.Control pattern="\d+" minlength='10' maxlength='10' required className='col-lg-12' placeholder="1234567890" />
                                     </Form.Group>
                                 </Form.Row>
 
@@ -1117,6 +1119,7 @@ class Booking extends React.Component {
                                             <Form.Label>Debit/Credit card number</Form.Label>
                                             <Form.Control
                                                 required
+                                                pattern="\d+"
                                                 type="text"
                                                 minlength="15" maxlength="19"
                                             />
@@ -1176,6 +1179,7 @@ class Booking extends React.Component {
                                             <Form.Control className='col-md-1'
                                                 required
                                                 type="text"
+                                                pattern="\d+"
                                                 minlength="3" maxlength="3"
                                             />
                                         </Form.Group>
@@ -1455,7 +1459,7 @@ class Booking extends React.Component {
 
                                         <Form.Group className='col-sm-2' as={Col} controlId="formGridZip">
                                             <Form.Label>Zip</Form.Label>
-                                            <Form.Control minlength='5' maxlength='5' />
+                                            <Form.Control minlength='5' maxlength='5' pattern="\d+" />
                                         </Form.Group>
                                     </Form.Row>
 
@@ -1518,11 +1522,7 @@ class Booking extends React.Component {
                                                 </li>
                                             </ol>
                                             <p>By selecting to complete this booking, I acknowledge that I have read and accept the above Rules & Restrictions.</p>
-                                            <Button size="lg" type='submit' variant="outline-success">Complete Booking
-                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
-                                                </svg>
-                                            </Button>{' '}
+                                            <BookingModal />
                                             <div className='message'>
                                                 <svg style={{ marginBottom: '5px', marginRight: '5px' }} width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-lock" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                     <path fill-rule="evenodd" d="M11.5 8h-7a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1zm-7-1a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-7zm0-3a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z" />

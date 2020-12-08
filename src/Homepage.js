@@ -122,9 +122,9 @@ class HomePage extends React.Component {
                             <h2 className='car-text' style={{ fontSize: '50px' }}>Holiday Deals</h2>
                             <h3 className='car-text' style={{ fontSize: '30px' }}>Buy more, get more</h3>
                             <h3 className='car-text' style={{ fontSize: '20px' }}>Enter one of the following promo codes at checkout</h3>
-                            <h5 className='car-text' style={{ fontSize: '18px' }}>flash - 10% off your flight. Offer expires 12/18 </h5>
-                            <h5 className='car-text' style={{ fontSize: '18px' }}>holiday - 5% off your flight. Offer expires 12/31 </h5>
-                            <h5 className='car-text' style={{ fontSize: '18px' }}>winter - 15% off your flight. Offer expires 1/30</h5>
+                            <h5 className='car-text' style={{ fontSize: '18px' }}>flash - 15% off your flight. Offer expires 12/18 </h5>
+                            <h5 className='car-text' style={{ fontSize: '18px' }}>holiday - 10% off your flight. Offer expires 12/31 </h5>
+                            <h5 className='car-text' style={{ fontSize: '18px' }}>winter - 5% off your flight. Offer expires 1/30</h5>
                         </Carousel.Caption>
                     </Carousel.Item>
                 </Carousel>
