@@ -52,6 +52,7 @@ class Search extends React.Component {
         let val_params = ['dateFrom', 'placeTo', 'placeFrom', 'econ']
         let i = 0
         let j = 0
+        let st={}
         while (i < val_params.length) {
             const v = this.state.params.get(val_params[i])
 
@@ -61,26 +62,23 @@ class Search extends React.Component {
             }
 
             if (this.state[val_params[i]] !== undefined)
-                this.setState({ [val_params[i]]: v })
+                st[val_params[i]]=v
+            
             queryParams += (val_params[i] + '=' + v + '&')
             i++
         }
+
         var dt = this.state.params.get('dateTo')
         if (dt) {
             var sp = this.formatDate(dt)
             queryParams += ('dateTo=' + dt)
             if (sp === false)
                 return this.setErr()
-
-
-
-
-
-
-            this.setState({ dateTo: dt, displayTo: sp.join('-') })
+            
+            st.dateTo=dt
+            st.displayTo=sp.join('-')
 
         }
-
         else
             queryParams = queryParams.slice(0, -1)
 
@@ -89,7 +87,7 @@ class Search extends React.Component {
 
             return this.setErr()
         }
-        this.setState({ displayFrom: df.join('-') })
+        st.displayFrom=df.join('-')
         let seats = 0
 
         while (j < int_params.length) {
@@ -99,11 +97,12 @@ class Search extends React.Component {
                 return this.setErr()
             }
 
-            this.setState({ [int_params[j]]: parseInt(k) })
+            st[int_params[j]]=parseInt(k)
             seats += parseInt(k)
             j++
         }
-
+        
+        
         queryParams += ('&seats=' + seats)
 
 
@@ -112,7 +111,7 @@ class Search extends React.Component {
             const searchResult = await axios(encodeURI('http://localhost:7000/search?' + queryParams))
 
             console.log(searchResult.data)
-            this.setState({ data: searchResult.data, render: true })
+            this.setState({ data: searchResult.data, render: true,...st })
 
 
         }

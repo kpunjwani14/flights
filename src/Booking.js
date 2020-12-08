@@ -1,22 +1,79 @@
 import React from 'react';
 import './Booking.css';
-import { Nav, Navbar, Accordion, Card, Alert, Form, Row, Col, Button, InputGroup } from 'react-bootstrap';
-
+import { Accordion, Card, Alert, Form, Row, Col, Button, InputGroup } from 'react-bootstrap';
+import {Redirect} from 'react-router-dom'
 class Booking extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
+            isErr: false,
+            flightIDB: '',
+            reqParams: {
+                adult: '',
+                child: '',
+                infant: '',
+                econ: '',
+                flightIDA: '',
 
+            },
+            params: new URLSearchParams(this.props.location.search)
         }
     }
     componentDidMount() {
         this.getDB()
     }
     getDB() {
+        if (!this.validateParams()) {
+            console.log('err')
+            return this.setErr()
+        }
+    }
+    validateParams() {
+
+        const nums = ['adult', 'child', 'infant']
+        const rp = this.state.reqParams
+        let st = {}
+        for (let f in rp) {
+
+            var x = this.state.params.get(f)
+
+            if (!x)
+                return false
+            if (nums.find(n => (n == f))) {
+
+                if (isNaN(x))
+                    return false
+                x = parseInt(x)
+
+            }
+            st[f] = x
+
+           
+
+        }
+        var y = this.state.params.get('flightIDB')
+        
+        this.setState(prevState => (
+            {
+                flightIDB: (y? y : prevState.flightIDB), 
+                reqParams: {
+                    ...prevState.reqParams,
+                    ...st
+                }
+            }), () => { console.log(this.state) })
+
+
+        return true
+
+    }
+    setErr() {
+
+        this.setState({ isErr: true })
 
     }
     travelingCard() {
         var elem = []
+
         for (var x = 0; x < 5; x++) {
             elem.push(
                 <Card.Body className={x == 0 ? 'padding2' : 'padding1'}>
@@ -226,9 +283,10 @@ class Booking extends React.Component {
     }
     render() {
         return (
+
             <div>
 
-
+                {this.state.isErr&&<Redirect to={{pathName:'/home'}}/>}
                 <div className='container'>
                     <h4>Secure booking - only takes a few minutes!</h4>
 
