@@ -215,7 +215,7 @@ class Booking extends React.Component {
                             <div>
                                 <hr></hr>
                                 <p><b>Seat selection</b></p>
-                                <p style={{ fontSize: '15px' }}>Your specific seat will be assigned by the airline before your flight.</p>
+                                <p style={{ fontSize: '15px' }}>Due to the ongoing pandemic, seat selection is not an option. Your specific seat will be assigned by the airline before your flight.</p>
                             </div>}
                     </Card.Text>
                     {x != 4 && <hr style={{ height: '1px' }}></hr>}
