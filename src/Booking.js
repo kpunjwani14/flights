@@ -76,9 +76,9 @@ class Booking extends React.Component {
 
         for (var x = 0; x < 5; x++) {
             elem.push(
-                <Card.Body>
+                <Card.Body className={x == 0 ? 'padding2' : 'padding1'}>
                     <Card.Title>
-                        <h6><b>Traveler {x}: Adult, primary contact</b></h6>
+                        <h6><b>Traveler {x + 1}: Adult, primary contact</b></h6>
                     </Card.Title>
                     <Card.Text>
                         {x == 0 && <p style={{ fontSize: '15px' }}>Traveler names must match government-issued photo ID exactly.</p>}
@@ -86,7 +86,7 @@ class Booking extends React.Component {
                         <Form.Row>
                             <Form.Group className='col-md-3' as={Col} controlId="formGridEmail">
                                 <Form.Label>First Name</Form.Label>
-                                <Form.Control required type="text" />
+                                <Form.Control required type="text" minlength="2" maxlength="20" />
                             </Form.Group>
 
                             <Form.Group className='col-md-3' as={Col} controlId="formGridEmail">
@@ -96,17 +96,15 @@ class Booking extends React.Component {
 
                             <Form.Group className='col-md-3' as={Col} controlId="formGridEmail">
                                 <Form.Label>Last Name</Form.Label>
-                                <Form.Control required type="text" />
+                                <Form.Control required type="text" minlength="2" maxlength="20" />
                             </Form.Group>
                         </Form.Row>
 
                         <Form.Label>Gender</Form.Label>
-
                         <Form.Group>
-                            <Form.Check inline name={`gender${x}`} type="radio" label='Male' />
-                            <Form.Check inline required name={`gender${x}`} type="radio" label='Female' />
+                            <Form.Check required inline name={`gender${x}`} type="radio" label='Male' />
+                            <Form.Check inline name={`gender${x}`} type="radio" label='Female' />
                         </Form.Group>
-
 
                         <Form.Label>Date of birth</Form.Label>
                         <Form.Row>
@@ -270,8 +268,9 @@ class Booking extends React.Component {
                             </Form.Group>
                         </Form.Row>
 
-                        {x == 0 &&
+                        {x == 4 &&
                             <div>
+                                <hr></hr>
                                 <p><b>Seat selection</b></p>
                                 <p style={{ fontSize: '15px' }}>Your specific seat will be assigned by the airline before your flight.</p>
                             </div>}
@@ -300,7 +299,7 @@ class Booking extends React.Component {
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill- rule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
                         </svg>
-                        Free cancellation within 24 hours of booking!
+                        Free cancellation!
                     </Alert>
 
                     <Accordion>
@@ -313,20 +312,28 @@ class Booking extends React.Component {
                             </Accordion.Toggle>
                             <Accordion.Collapse eventKey="0">
                                 <Card.Body>
-                                    Promo Code: holiday
-                                    <Form.Group>
-                                        <InputGroup style={{ marginTop: '10px' }}>
-                                            <Form.Control className='col-lg-2' size="lg" type="text" placeholder="Promo Code" />
-                                            <InputGroup.Append>
-                                                <Button variant="dark">Apply</Button>{' '}
-                                            </InputGroup.Append>
-                                        </InputGroup>
-                                    </Form.Group>
+                                    <Row>
+                                        <Col>
+                                            <Form.Group>
+                                                <InputGroup style={{ marginTop: '10px' }}>
+                                                    <Form.Control className='col-lg-4' size="lg" type="text" placeholder="Promo Code" />
+                                                    <InputGroup.Append>
+                                                        <Button variant="dark">Apply</Button>{' '}
+                                                    </InputGroup.Append>
+                                                </InputGroup>
+                                            </Form.Group>
+                                        </Col>
+                                        <Col>
+                                            <b>Price summary</b>
+                                            <p>Traveler 1: $314.20 <br /> Traveler 2: $314.20</p>
+                                        </Col>
+                                    </Row>
                                 </Card.Body>
                             </Accordion.Collapse>
                         </Card>
                     </Accordion>
                     <Form noValidate validated>
+
                         <Card className='card'>
                             <Card.Header>
                                 <span>
@@ -1069,7 +1076,7 @@ class Booking extends React.Component {
 
                                     <Form.Group controlId="formGridAddress1">
                                         <Form.Label>Phone number</Form.Label>
-                                        <Form.Control className='col-lg-12' placeholder="123-456-7890" />
+                                        <Form.Control minlength='10' maxlength='10' required className='col-lg-12' placeholder="1234567890" />
                                     </Form.Group>
                                 </Form.Row>
 
@@ -1100,6 +1107,7 @@ class Booking extends React.Component {
                                             <Form.Control
                                                 required
                                                 type="text"
+                                                minlength='2' maxlength='20'
                                             />
                                         </Form.Group>
                                     </Form.Row>
@@ -1110,6 +1118,7 @@ class Booking extends React.Component {
                                             <Form.Control
                                                 required
                                                 type="text"
+                                                minlength="15" maxlength="19"
                                             />
                                         </Form.Group>
                                     </Form.Row>
@@ -1167,6 +1176,7 @@ class Booking extends React.Component {
                                             <Form.Control className='col-md-1'
                                                 required
                                                 type="text"
+                                                minlength="3" maxlength="3"
                                             />
                                         </Form.Group>
                                     </Form.Row>
@@ -1421,7 +1431,7 @@ class Booking extends React.Component {
 
                                     <Form.Group controlId="formGridAddress1">
                                         <Form.Label>Billing address 1</Form.Label>
-                                        <Form.Control className='col-lg-6' placeholder="123 Main St" />
+                                        <Form.Control required className='col-lg-6' placeholder="123 Main St" />
                                     </Form.Group>
 
                                     <Form.Group controlId="formGridAddress2">
@@ -1432,12 +1442,12 @@ class Booking extends React.Component {
                                     <Form.Row>
                                         <Form.Group className='col-lg-3' as={Col} controlId="formGridCity">
                                             <Form.Label>City</Form.Label>
-                                            <Form.Control />
+                                            <Form.Control minlength='2' maxlength='20' required />
                                         </Form.Group>
 
                                         <Form.Group className='col-sm-2' as={Col} controlId="formGridState">
                                             <Form.Label>State</Form.Label>
-                                            <Form.Control as="select" required custom>
+                                            <Form.Control as="select">
                                                 <option value="">Select</option>
                                                 <option value="AL">AL</option><option value="AK">AK</option><option value="AZ">AZ</option><option value="AR">AR</option><option value="CA">CA</option><option value="CO">CO</option><option value="CT">CT</option><option value="DE">DE</option><option value="DC">DC</option><option value="FL">FL</option><option value="GA">GA</option><option value="HI">HI</option><option value="ID">ID</option><option value="IL">IL</option><option value="IN">IN</option><option value="IA">IA</option><option value="KS">KS</option><option value="KY">KY</option><option value="LA">LA</option><option value="ME">ME</option><option value="MD">MD</option><option value="MA">MA</option><option value="MI">MI</option><option value="MN">MN</option><option value="MS">MS</option><option value="MO">MO</option><option value="MT">MT</option><option value="NE">NE</option><option value="NV">NV</option><option value="NH">NH</option><option value="NJ">NJ</option><option value="NM">NM</option><option value="NY">NY</option><option value="NC">NC</option><option value="ND">ND</option><option value="OH">OH</option><option value="OK">OK</option><option value="OR">OR</option><option value="PA">PA</option><option value="RI">RI</option><option value="SC">SC</option><option value="SD">SD</option><option value="TN">TN</option><option value="TX">TX</option><option value="UT">UT</option><option value="VT">VT</option><option value="VA">VA</option><option value="WA">WA</option><option value="WV">WV</option><option value="WI">WI</option><option value="WY">WY</option><option value="AS">AS</option><option value="FM">FM</option><option value="GU">GU</option><option value="MH">MH</option><option value="MP">MP</option><option value="PW">PW</option><option value="PR">PR</option><option value="VI">VI</option><option value="AA">AA</option><option value="AE">AE</option><option value="AP">AP</option>
                                             </Form.Control>
@@ -1445,7 +1455,7 @@ class Booking extends React.Component {
 
                                         <Form.Group className='col-sm-2' as={Col} controlId="formGridZip">
                                             <Form.Label>Zip</Form.Label>
-                                            <Form.Control />
+                                            <Form.Control minlength='5' maxlength='5' />
                                         </Form.Group>
                                     </Form.Row>
 
@@ -1454,48 +1464,77 @@ class Booking extends React.Component {
                             </Card.Body>
                         </Card>
 
-                        <Card style={{ marginBottom: '10px' }} className='card'>
-                            <Card.Header>
-                                <span>
-                                    <svg style={{ marginBottom: '8px', marginRight: '5px' }} width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-clipboard-check" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
-                                        <path fill-rule="evenodd" d="M9.5 1h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3zm4.354 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
-                                    </svg>
-                                    <h4 style={{ display: "inline" }}>Review and book your trip</h4>
-                                </span>
-                            </Card.Header>
-                            <Card.Body>
-                                <Card.Title>
-                                    <h6>Please Read!</h6>
-                                </Card.Title>
-                                <Card.Text>
-                                    <ol>
-                                        <li>Review your trip details to make sure the dates and times are correct.</li>
-                                        <li>Check your spelling. Flight passenger names must match government-issued photo ID exactly.</li>
-                                        <li>
-                                            Review the terms of your booking:
+                        <Row>
+                            <Col>
+                                <Card>
+                                    <Card.Header>
+                                        <span>
+                                            <svg style={{ marginBottom: '8px', marginRight: '5px' }} width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cursor" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103zM2.25 8.184l3.897 1.67a.5.5 0 0 1 .262.263l1.67 3.897L12.743 3.52 2.25 8.184z" />
+                                            </svg>
+                                            <h4 style={{ display: "inline" }}>Flight info</h4>
+                                        </span>
+                                    </Card.Header>
+                                    <Card.Body>
+                                        <Card.Title>One way flight</Card.Title>
+                                        <Card.Subtitle className="mb-2 text-muted">2 tickets: 2 adults </Card.Subtitle>
+                                        <hr />
+                                        <b>Houston (IAH) to Buffalo (BUF)</b>
+                                        <p>Tuesday, Dec 12 <br /> 6:23am - 1:01pm (5h 38m) <br />1h 30m stop in CLT</p>
+
+                                        <hr />
+                                        <b>Your price summary</b>
+                                        <p>Traveler 1: $314.20 <br /> Traveler 2: $314.20</p>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                            <Col>
+                                <Card style={{ marginBottom: '10px' }} className='card'>
+                                    <Card.Header>
+                                        <span>
+                                            <svg style={{ marginBottom: '8px', marginRight: '5px' }} width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-clipboard-check" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                                                <path fill-rule="evenodd" d="M9.5 1h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3zm4.354 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+                                            </svg>
+                                            <h4 style={{ display: "inline" }}>Review and book your trip</h4>
+                                        </span>
+                                    </Card.Header>
+                                    <Card.Body>
+                                        <Card.Title>
+                                            <h6>Please Read!</h6>
+                                        </Card.Title>
+                                        <Card.Text>
+                                            <ol>
+                                                <li>Review your trip details to make sure the dates and times are correct.</li>
+                                                <li>Check your spelling. Flight passenger names must match government-issued photo ID exactly.</li>
+                                                <li>
+                                                    Review the terms of your booking:
                                         <ul>
-                                                <li>Airline assigns seats</li>
-                                                <li>Bring a carry-on bag</li>
-                                                <li>Pay to bring a checked bag</li>
-                                            </ul>
-                                        </li>
-                                    </ol>
-                                    <p>By selecting to complete this booking, I acknowledge that I have read and accept the above Rules & Restrictions.</p>
-                                    <Button size="lg" type='submit' variant="outline-success">Complete Booking
+                                                        <li>Airline assigns seats</li>
+                                                        <li>Bring a carry-on bag</li>
+                                                        <li>Pay to bring a checked bag</li>
+                                                        <li>To reschedule your flight, cancel your current one and book a new one again</li>
+                                                    </ul>
+                                                </li>
+                                            </ol>
+                                            <p>By selecting to complete this booking, I acknowledge that I have read and accept the above Rules & Restrictions.</p>
+                                            <Button size="lg" type='submit' variant="outline-success">Complete Booking
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
-                                        </svg>
-                                    </Button>{' '}
-                                    <div className='message'>
-                                        <svg style={{ marginBottom: '5px', marginRight: '5px' }} width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-lock" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" d="M11.5 8h-7a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1zm-7-1a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-7zm0-3a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z" />
-                                        </svg>
-                                        <p style={{ fontSize: '14px', display: "inline" }}>We use secure transmission and encrypted storage to protect your personal information.</p>
-                                    </div>
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
+                                                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+                                                </svg>
+                                            </Button>{' '}
+                                            <div className='message'>
+                                                <svg style={{ marginBottom: '5px', marginRight: '5px' }} width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-lock" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M11.5 8h-7a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1zm-7-1a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-7zm0-3a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z" />
+                                                </svg>
+                                                <p style={{ fontSize: '14px', display: "inline" }}>We use secure transmission and encrypted storage to protect your personal information.</p>
+                                            </div>
+                                        </Card.Text>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        </Row>
+
                     </Form>
                 </div>
 
