@@ -16,7 +16,7 @@ function Example() {
 
     return (
         <>
-            {red && <Redirect to='./pass' />}
+            {red && <Redirect to='./boardingpass' />}
             <div class="row justify-content-center">
                 <Button variant="primary" onClick={handleShow}>
                     Search flights
