@@ -6,11 +6,24 @@ import './Search.css'
 class ResTable extends React.Component {
     constructor(props) {
         super(props)
+        console.log(this.props.tot)
         this.state={
             activeVal:'',
 
 
         }
+    }
+    getHours(dateB,dateA=0){
+        
+        const x=(dateB-dateA)/(60000)
+        const z=Math.floor(x/60)
+        const y=x%60
+        
+        return (z>0?z+`h `:'')+ (y>0?`${y}m`:'')
+    }
+  
+    getTime(time){
+        return time.toLocaleString('en-US', { hour: 'numeric', minute:'numeric', hour12: true })
     }
     getResults(results) {
         let flights = {}
@@ -24,6 +37,9 @@ class ResTable extends React.Component {
                 flights[d.flight_id]['stops'] = []
             flights[d.flight_id]['departure_airport'] = d.aira
             flights[d.flight_id]['arrival_airport'] = d.airb
+            flights[d.flight_id]['price']=d.price
+            flights[d.flight_id].scheduled_departure=new Date(d.scheduled_departure)
+            flights[d.flight_id].scheduled_arrival=new Date(d.scheduled_arrival) 
             if (d.airc)
                 flights[d.flight_id]['stops'].push({ 'airport': d.airc, 'duartion': d.duration })
 
@@ -44,16 +60,18 @@ class ResTable extends React.Component {
                                 <Row><Col>
                                     {s.airport}</Col></Row>
                                 <Row><Col>
-                                    Duartion: {s.duartion} minutes</Col></Row></>)
+                                    Duartion: {this.getHours(s.duartion*60000)}</Col></Row></>)
                         }) : 'None'}
                     </Col>
-                    <Col>Price</Col>
-                    <Col xs={2}><Button size="sm" variant="outline-primary" active={f===this.props.act} value={f} onClick={e=>{this.props.setAct(this.props.type,e.target.value);console.log(e.target.value)}}>Select Flight</Button></Col>
+                    <Col>${parseInt(this.props.disc?(x.price-75):x.price)*this.props.tot}.00</Col>
+                    <Col><Row><Col>{this.getTime(x.scheduled_departure)}{'-'+this.getTime(x.scheduled_arrival)}</Col></Row>
+                    <Row><Col>{this.getHours(x.scheduled_arrival,x.scheduled_departure)}</Col></Row></Col>
+                    <Col><Button size="sm" variant="outline-primary" active={f===this.props.act} value={f} onClick={e=>{this.props.setAct(this.props.type,e.target.value);console.log(e.target.value)}}>Select Flight</Button></Col>
                    
                 </Row>
             </ListGroup.Item>)
         }
-        console.log(flights)
+        
         return (<>
             
             {res}
@@ -62,11 +80,11 @@ class ResTable extends React.Component {
             ) 
     }
     getHeader() {
-        const header = ['Departure Airport', 'Arrival Airport', 'Stops', 'Price']
+        const header = ['Departure Airport', 'Arrival Airport', 'Stops', 'Price','Times']
         return (
             <>
             {header.map(h => <Col><b>{h}</b></Col>)}
-            <Col xs={2}></Col>
+            <Col></Col>
             </>)
     }
     render() {

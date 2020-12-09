@@ -23,7 +23,7 @@ class Search extends React.Component {
             render: false,
             valTo: '',
             valFrom: '',
-            econ:''
+            econ: ''
 
 
         }
@@ -35,7 +35,9 @@ class Search extends React.Component {
     componentDidMount() {
         this.checkDB()
     }
-
+    inRange(x, min = 0) {
+        return x >= min && x <= 5
+    }
     formatDate(d) {
         var s = d.split('-')
         if (!s[2])
@@ -52,7 +54,7 @@ class Search extends React.Component {
         let val_params = ['dateFrom', 'placeTo', 'placeFrom', 'econ']
         let i = 0
         let j = 0
-        let st={}
+        let st = {}
         while (i < val_params.length) {
             const v = this.state.params.get(val_params[i])
 
@@ -62,8 +64,8 @@ class Search extends React.Component {
             }
 
             if (this.state[val_params[i]] !== undefined)
-                st[val_params[i]]=v
-            
+                st[val_params[i]] = v
+
             queryParams += (val_params[i] + '=' + v + '&')
             i++
         }
@@ -74,9 +76,9 @@ class Search extends React.Component {
             queryParams += ('dateTo=' + dt)
             if (sp === false)
                 return this.setErr()
-            
-            st.dateTo=dt
-            st.displayTo=sp.join('-')
+
+            st.dateTo = dt
+            st.displayTo = sp.join('-')
 
         }
         else
@@ -87,7 +89,7 @@ class Search extends React.Component {
 
             return this.setErr()
         }
-        st.displayFrom=df.join('-')
+        st.displayFrom = df.join('-')
         let seats = 0
 
         while (j < int_params.length) {
@@ -97,12 +99,13 @@ class Search extends React.Component {
                 return this.setErr()
             }
 
-            st[int_params[j]]=parseInt(k)
+            st[int_params[j]] = parseInt(k)
             seats += parseInt(k)
             j++
         }
-        
-        
+        if (!this.inRange(st.adult, 1) || !this.inRange(st.child) || !this.inRange(st.infant))
+            return this.setErr()
+
         queryParams += ('&seats=' + seats)
 
 
@@ -111,7 +114,7 @@ class Search extends React.Component {
             const searchResult = await axios(encodeURI('http://localhost:7000/search?' + queryParams))
 
             console.log(searchResult.data)
-            this.setState({ data: searchResult.data, render: true,...st })
+            this.setState({ data: searchResult.data, render: true, ...st })
 
 
         }
@@ -123,7 +126,9 @@ class Search extends React.Component {
     setErr() {
         this.setState({ isErr: true })
     }
-
+    getTotal() {
+        return this.state.adult + this.state.child
+    }
     checkAll() {
         return this.state.data[0].length > 0 && (this.state.dateTo === '' || this.state.data[1].length > 0)
     }
@@ -143,8 +148,8 @@ class Search extends React.Component {
 
 
 
-                    {this.state.render && (this.checkAll()) && <ResTable data={this.state.data[0]} pf={this.state.placeFrom} pt={this.state.placeTo} type='valFrom' act={this.state.valFrom} setAct={this.setActiveBut} date={this.state.displayFrom} />}
-                    {this.state.render && this.checkTo() && this.state.data[0].length > 0 && <ResTable act={this.state.valTo} data={this.state.data[1]} type='valTo' setAct={this.setActiveBut} pf={this.state.placeTo} pt={this.state.placeFrom} date={this.state.displayTo} />}
+                    {this.state.render && (this.checkAll()) && <ResTable disc={this.state.dateTo!==''} tot={this.getTotal()} data={this.state.data[0]} pf={this.state.placeFrom} pt={this.state.placeTo} type='valFrom' act={this.state.valFrom} setAct={this.setActiveBut} date={this.state.displayFrom} />}
+                    {this.state.render && this.checkTo() && this.state.data[0].length > 0 && <ResTable disc={this.state.dateTo!==''} tot={this.getTotal()} act={this.state.valTo} data={this.state.data[1]} type='valTo' setAct={this.setActiveBut} pf={this.state.placeTo} pt={this.state.placeFrom} date={this.state.displayTo} />}
                     {this.state.render && !this.checkAll() && <h3 className='text'>NO RESULTS FOUND!</h3>}
                     {this.state.valFrom !== '' && (this.state.dateTo === '' || this.state.valTo !== '') && <Redirect to={{ pathname: '/checkout', search: `econ=${this.state.econ}&adult=${this.state.adult}&child=${this.state.child}&infant=${this.state.infant}&flightIDA=${this.state.valFrom}${this.state.valTo !== '' ? (`&flightIDB=${this.state.valTo}`) : (``)}` }} />}
 
