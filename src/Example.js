@@ -1,16 +1,22 @@
 import React from 'react';
 import './Checkin.css';
-import { Form, Row, Col, Button, Card, Modal } from 'react-bootstrap';
+import { Button, Card, Modal } from 'react-bootstrap';
 import { useState } from "react";
+import { Redirect } from 'react-router-dom';
 
 function Example() {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const [red, setRed] = useState(false)
+    const handleClick = () => {
+        setRed(true)
+    }
 
     return (
         <>
+            {red && <Redirect to='./pass' />}
             <div class="row justify-content-center">
                 <Button variant="primary" onClick={handleShow}>
                     Search flights
@@ -32,7 +38,7 @@ function Example() {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
             </Button>
-                    <Button variant="success" onClick={handleClose}>
+                    <Button variant="success" onClick={handleClick}>
                         Complete check-in
             </Button>
                 </Modal.Footer>
