@@ -38,7 +38,12 @@ app.get('/checkout', (req, res) => {
   console.log(req.session)
   res.send('Hello Y')
 })
-
+app.get('/promos',(req,res,next)=>{
+  pool.connect((err,client,release)=>{
+    if(err)
+      return next(err)
+  })
+})
 app.get('/search', (req, res, next) => {
   
   const { seats, dateTo, dateFrom, econ, placeTo, placeFrom } = req.query
@@ -85,7 +90,7 @@ app.get('/search', (req, res, next) => {
     WHERE 
     d.city='${from[0]}' and
     a.city='${to[0]}' and d.st_coun='${from[1]}' and a.st_coun='${to[1]}'
-    and scheduled_departure::date='${dateFrom}' and avail_${econ}-${seats}>0  `, (err, result) => {
+    and scheduled_departure::date='${dateFrom}' and avail_${econ}-${seats}>0`, (err, result) => {
 
           callback(err, result)
 

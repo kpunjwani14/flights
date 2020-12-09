@@ -18,10 +18,8 @@ class HomePage extends React.Component {
                 infant: 0,
                 placeTo: '',
                 placeFrom: '',
-
-
                 econ: 'econ',
-                dateFrom: this.getDate(),
+                dateFrom: this.getDate()
 
             }
 
@@ -290,7 +288,6 @@ class HomePage extends React.Component {
                                     </Col>
                                 </Form.Row>
                             </Form>
-
                         </Card.Body>
                     </Card>
                 </section>
