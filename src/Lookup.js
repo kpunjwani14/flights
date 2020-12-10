@@ -6,7 +6,7 @@ class Lookup extends React.Component {
         return (
             <div>
                 <h1>My Flights</h1>
-                <p style={{ textAlign: 'center' }}>See your upcoming or waitlisted flights. You can also edit or delete your flights.</p>
+                <p style={{ textAlign: 'center' }}>See your upcoming or waitlisted flights, or edit/delete your flights.</p>
                 <div className='col d-flex justify-content-center'>
                     <Card style={{ width: '90%' }}>
                         <Card.Body>

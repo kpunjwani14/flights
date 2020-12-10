@@ -20,9 +20,9 @@ class BoardingPass extends React.Component {
                         <Card.Title>ECONOMY</Card.Title>
 
                         <Row>
-                            <Col md={4}>
+                            {/* <Col md={4}>
                                 PASSENGER NAME
-                                    <h5>SHEHZMAN</h5>
+                                    <h5>JOHN SMITH</h5>
                             </Col>
                             <Col md={3}>
                                 FLIGHT
@@ -31,14 +31,14 @@ class BoardingPass extends React.Component {
                             <Col md={3}>
                                 TICKET NO
                                     <h5>312</h5>
-                            </Col>
-                            <Col md={2}>
+                            </Col> */}
+                            <Col md={12}>
                                 SEAT
                                     <h5>18B</h5>
                             </Col>
                         </Row>
 
-                        <Row>
+                        {/* <Row>
                             <Col md={12}>
                                 FROM:
                                     <h6 style={{ display: 'inline', marginLeft: '4px' }}>LAX</h6>
@@ -49,7 +49,7 @@ class BoardingPass extends React.Component {
                                 TO:
                                     <h6 style={{ display: 'inline', marginLeft: '4px' }}>MIA</h6>
                             </Col>
-                        </Row>
+                        </Row> */}
 
                         <Row>
                             <Col md={4}>
