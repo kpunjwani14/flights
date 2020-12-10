@@ -10,6 +10,7 @@ import Boarding from './Boarding'
 import Erd from './Erd'
 import BoardingPass from './BoardingPass'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Lookup from './Lookup';
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
           <Route path="/board" exact component={Boarding} />
           <Route path="/erd" exact component={Erd} />
           <Route path="/boardingpass" exact component={BoardingPass} />
-
+          <Route path="/myflights" exact component={Lookup} />
 
         </Switch>
 
