@@ -17,7 +17,7 @@ class BoardingPass extends React.Component {
                             Flights
                         </Card.Header>
                     <Card.Body style={{ backgroundColor: '#f7fafc' }}>
-                        <Card.Title>Economy</Card.Title>
+                        <Card.Title>ECONOMY</Card.Title>
 
                         <Row>
                             <Col md={4}>
