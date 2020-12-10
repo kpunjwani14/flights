@@ -12,6 +12,9 @@ const session = require('express-session')
 const async = require('async')
 const pgSession = require('connect-pg-simple')(session)
 const app = express()
+const bodyParser = require("body-parser")
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cors())
 // app.use(session({
 //   name: 'hwsess',
@@ -31,7 +34,20 @@ app.use(cors())
 //   }
 // }))
 
-
+app.post('/checkout',async (req,res,next)=>{
+  
+  console.log(req.body)
+  const client=await pool.connect()
+  try{
+    await client.query('begin transaction')
+  }
+  catch(e){
+    console.log(e)
+    await client.query('ROLLBACK')
+    next(e)
+  }
+  res.send('hello world')
+})
 app.get('/checkout', (req, res, next) => {
 
   let { flightIDA, flightIDB, econ, seats } = req.query

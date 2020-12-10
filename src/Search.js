@@ -143,13 +143,13 @@ class Search extends React.Component {
                     pathname: "/"
                 }} />}
 
-                <div class='container'>
+                <div className='container'>
 
 
 
 
-                    {this.state.render && (this.checkAll()) && <ResTable disc={this.state.dateTo!==''} tot={this.getTotal()} data={this.state.data[0]} pf={this.state.placeFrom} pt={this.state.placeTo} type='valFrom' act={this.state.valFrom} setAct={this.setActiveBut} date={this.state.displayFrom} />}
-                    {this.state.render && this.checkTo() && this.state.data[0].length > 0 && <ResTable disc={this.state.dateTo!==''} tot={this.getTotal()} act={this.state.valTo} data={this.state.data[1]} type='valTo' setAct={this.setActiveBut} pf={this.state.placeTo} pt={this.state.placeFrom} date={this.state.displayTo} />}
+                    {this.state.render && (this.checkAll()) && <ResTable ext={this.state.econ==='business'} disc={this.state.dateTo!==''} tot={this.getTotal()} data={this.state.data[0]} pf={this.state.placeFrom} pt={this.state.placeTo} type='valFrom' act={this.state.valFrom} setAct={this.setActiveBut} date={this.state.displayFrom} />}
+                    {this.state.render && this.checkTo() && this.state.data[0].length > 0 && <ResTable ext={this.state.econ==='business'} disc={this.state.dateTo!==''} tot={this.getTotal()} act={this.state.valTo} data={this.state.data[1]} type='valTo' setAct={this.setActiveBut} pf={this.state.placeTo} pt={this.state.placeFrom} date={this.state.displayTo} />}
                     {this.state.render && !this.checkAll() && <h3 className='text'>NO RESULTS FOUND!</h3>}
                     {this.state.valFrom !== '' && (this.state.dateTo === '' || this.state.valTo !== '') && <Redirect to={{ pathname: '/checkout', search: `econ=${this.state.econ}&adult=${this.state.adult}&child=${this.state.child}&infant=${this.state.infant}&flightIDA=${this.state.valFrom}${this.state.valTo !== '' ? (`&flightIDB=${this.state.valTo}`) : (``)}` }} />}
 

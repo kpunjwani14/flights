@@ -1,6 +1,6 @@
 import React from 'react';
 import './Checkin.css';
-import { Form, Row, Col, Button, Card, Modal } from 'react-bootstrap';
+import {  Button, Card, Modal } from 'react-bootstrap';
 import { useState } from "react";
 
 function Example() {

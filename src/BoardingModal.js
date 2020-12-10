@@ -15,7 +15,7 @@ function BoardingModal() {
     return (
         <>
             {red && <Redirect to='/' />}
-            <div class="row justify-content-center">
+            <div className="row justify-content-center">
                 <Button variant="primary" onClick={() => setShow(true)}>
                     Board
         </Button>
