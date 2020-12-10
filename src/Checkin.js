@@ -5,6 +5,14 @@ import './Example'
 import Example from './Example';
 
 class Checkin extends React.Component {
+    constructor(){
+        super()
+        this.state={
+            firstName:'',
+            lastName:'',
+            ticketNo:''
+        }
+    }
     render() {
         return (
             <div>
