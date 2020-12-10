@@ -16,6 +16,8 @@ class Booking extends React.Component {
 
         this.state = {
             returned: false,
+            results:{waitlist:'',tickets:[],bookRef:''}, 
+            running:false,
             promo: '',
             promoApplied: false,
             isValid: false,
@@ -52,7 +54,7 @@ class Booking extends React.Component {
             infant: ['2020-11-04', '2020-04-20', '2020-03-02', '2020-07-03', '2020-05-04']
         }
         const lNames = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez', 'Hernandez', 'Lopez', 'Gonzalez', 'Wilson', 'Anderson']
-        console.log(names.length, gen.length, lNames.length)
+        
         const people = ['adult', 'child', 'infant']
         let counter = 0
         ran['travelers'] = {}
@@ -196,7 +198,7 @@ class Booking extends React.Component {
             if (!qp)
                 throw new Error("wrong qp")
             const res = await axios('http://localhost:7000/checkout?' + qp)
-
+            console.log(res.data,'check')
             const x = res.data[0].length
             const y = res.data[1].length
             if (x > 0 && (this.state.flightIDB === '' || y > 0))
@@ -309,7 +311,7 @@ class Booking extends React.Component {
 
     getPrices() {
         let p = []
-
+ 
         const a = ['adult', 'child', 'infant']
         const rate = [1, 1, 0]
         let disc = this.state.flightIDB !== '' ? 75 : 0
@@ -429,7 +431,7 @@ class Booking extends React.Component {
 
         return (elem)
     }
-    sendData(){
+    async sendData(){
         let test={
             ...this.state.reqParams,
             ...this.state.discountRate,
@@ -441,23 +443,30 @@ class Booking extends React.Component {
 
 
         }
-        console.log(test,'test')
+        this.setState({running:true})
+        let resu
         try{
-            axios.post('http://localhost:7000/checkout',{
+             resu=await axios.post('http://localhost:7000/checkout',{
                 ...this.state.reqParams,
-                ...this.state.discountRate,
-                ...this.state.promo,
-                ...this.state.flightIDB,
+                discountRate:this.state.discountRate,
+                promo:this.state.promo,
+                flightIDB:this.state.flightIDB,
                 travelers:this.state.travelers,
                 payment:this.state.payment,
                 customer:this.state.customer
+                
 
 
             })
+            this.setState({returned:true,results:resu.data,running:false})
+            console.log(resu)
         }
         catch(e){
-
+            this.setErr()
         }
+        
+            
+        
     }
     render() {
         return (
@@ -547,7 +556,7 @@ class Booking extends React.Component {
                                         <Form.Row>
                                             <Form.Group className='col-lg-5' controlId="exampleForm.ControlInput1">
                                                 <Form.Label>Email address</Form.Label>
-                                                <Form.Control value={this.state.customer.email} name='customer_email' onChange={this.setInput} required type="email" placeholder="name@example.com" />
+                                                <Form.Control value={this.state.customer.email} name='customer_email' maxLength='25' onChange={this.setInput} required type="email" placeholder="name@example.com" />
                                             </Form.Group>
                                         </Form.Row>
                                         <Form.Row>
@@ -759,7 +768,7 @@ class Booking extends React.Component {
                                                     </li>
                                                 </ol>
                                                 <p>By selecting to complete this booking, I acknowledge that I have read and accept the above Rules & Restrictions.</p>
-                                                <BookingModal/>
+                                                <BookingModal return={this.state.returned} result={this.state.results} run={this.state.running}/>
                                                 <div className='message'>
                                                     <svg style={{ marginBottom: '5px', marginRight: '5px' }} width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-lock" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                         <path fillRule="evenodd" d="M11.5 8h-7a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1zm-7-1a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-7zm0-3a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z" />
