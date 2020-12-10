@@ -63,7 +63,7 @@ class ResTable extends React.Component {
                                     Duartion: {this.getHours(s.duartion*60000)}</Col></Row></>)
                         }) : 'None'}
                     </Col>
-                    <Col>${parseInt(this.props.disc?(x.price-75):x.price)*this.props.tot}.00</Col>
+                    <Col>${((parseInt(this.props.disc?(x.price-75):x.price))+(this.props.ext?200:0))*this.props.tot}.00</Col>
                     <Col><Row><Col>{this.getTime(x.scheduled_departure)}{'-'+this.getTime(x.scheduled_arrival)}</Col></Row>
                     <Row><Col>{this.getHours(x.scheduled_arrival,x.scheduled_departure)}</Col></Row></Col>
                     <Col><Button size="sm" variant="outline-primary" active={f===this.props.act} value={f} onClick={e=>{this.props.setAct(this.props.type,e.target.value);console.log(e.target.value)}}>Select Flight</Button></Col>

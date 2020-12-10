@@ -3,7 +3,14 @@
     height: 750px;
     margin: 20px auto;
 }
-
+.fo{
+    margin-bottom: 16px;
+}
+.ranBut{
+    display: flex;
+    justify-content: center;
+    
+}
 div > h4{
     margin-bottom: 20px;
 }
