@@ -39,7 +39,7 @@ class BoardingPass extends React.Component {
                             </Col>
                         </Row>
 
-                        <Row>
+                        {/* <Row>
                             <Col md={12}>
                                 FROM:
                                     <h6 style={{ display: 'inline', marginLeft: '4px' }}>{this.props.data.depart}</h6>
@@ -50,7 +50,7 @@ class BoardingPass extends React.Component {
                                 TO:
                                     <h6 style={{ display: 'inline', marginLeft: '4px' }}>{this.props.data.arr}</h6>
                             </Col>
-                        </Row>
+                        </Row> */}
 
                         <Row>
                             <Col md={4}>
