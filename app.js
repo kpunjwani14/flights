@@ -1,6 +1,6 @@
 
 const { Pool } = require('pg')
-let queries=[]
+let queries = []
 var cors = require('cors')
 const pg = require('pg-promise')()
 const db = pg({
@@ -32,28 +32,34 @@ app.use(cors())
 //     secure: false
 //   }
 // }))
-app.get('/queries',(req,res)=>{
+app.get('/queries', (req, res) => {
   res.send(queries)
 })
-app.post('/checkin',async(req,res,next)=>{
-  let body=req.body
-  db.task(async t=>{
-    let check=await db.any('select ticket_no,name from ticket inner join passengers p ON ticket.passenger_id = p.passenger_id where ticket_no=$1 and name=$2 ',[parseInt(body.ticketNo),body.firstName+' '+body.lastName])
-    if(check.length===0)
-    return{found:false}
+app.post('/checkin', async (req, res, next) => {
+  
+  let body = req.body
+  db.task(async t => {
+    let check = await db.any('select scheduled_departure,departure_airport,arrival_airport from ticket_flights t inner join flights f ON t.flight_id = f.flight_id where ticket_no=$1 and f.flight_id=$2 ', [parseInt(body.ticketNo), body.flightID])
+    
+    if (check.length === 0)
+      return { found: false }
+    else
+      return { found: true, data: check[0] }
 
 
-  }).then(data=>res.send(data)).catch(e=>next(e))
+
+
+  }).then(data =>res.send(data)).catch(e => {console.log(e);next(e)})
 })
 app.post('/checkout', async (req, res, next) => {
   let vals = req.body
   let priceB
-  
+
   db.tx(async t => {
     queries.push(pg.as.format('select price from flights where flight_id=$1', [parseInt(vals.flightIDA)]))
     let p = await t.one('select price from flights where flight_id=$1', [parseInt(vals.flightIDA)])
 
-    if (vals.flightIDB !== ''){
+    if (vals.flightIDB !== '') {
       priceB = await t.one('select price from flights where flight_id=$1', [parseInt(vals.flightIDB)])
       queries.push(pg.as.format('select price from flights where flight_id=$1', [parseInt(vals.flightIDB)]))
     }
@@ -94,12 +100,12 @@ app.post('/checkout', async (req, res, next) => {
     let pbi = await t.one(pg.as.format('insert into payment_breakdown (${this:name}) values(${this:csv}) returning payment_breakdown_id', payParams))
     queries.push(pg.as.format('insert into payment_breakdown (${this:name}) values(${this:csv}) returning payment_breakdown_id', payParams))
     for (let i = 0; i < (vals.adult + vals.child); i++) {
-      t.any(pg.as.format('insert into individual_breakdown (payment_breakdown_id,total) values($1,$2)', [pbi.payment_breakdown_id, parseFloat(indPrice)]))
+      await t.any(pg.as.format('insert into individual_breakdown (payment_breakdown_id,total) values($1,$2)', [pbi.payment_breakdown_id, parseFloat(indPrice)]))
       queries.push(pg.as.format('insert into individual_breakdown (payment_breakdown_id,total) values($1,$2)', [pbi.payment_breakdown_id, parseFloat(indPrice)]))
     }
     for (let i = 0; i < vals.infant; i++)
-      t.any(pg.as.format('insert into individual_breakdown (payment_breakdown_id,total) values($1,0)', [pbi.payment_breakdown_id]))
-      queries.push(pg.as.format('insert into individual_breakdown (payment_breakdown_id,total) values($1,0)', [pbi.payment_breakdown_id]))
+      await t.any(pg.as.format('insert into individual_breakdown (payment_breakdown_id,total) values($1,0)', [pbi.payment_breakdown_id]))
+    queries.push(pg.as.format('insert into individual_breakdown (payment_breakdown_id,total) values($1,0)', [pbi.payment_breakdown_id]))
     let bRef = await (t.one(pg.as.format('insert into bookings (payment_breakdown_id,customer_id,book_date) values ($1,$2,now()) returning book_ref', [pbi.payment_breakdown_id, x[0].customer_id])))
     queries.push(pg.as.format('insert into bookings (payment_breakdown_id,customer_id,book_date) values ($1,$2,now()) returning book_ref', [pbi.payment_breakdown_id, x[0].customer_id]))
     let pass = []
@@ -128,54 +134,54 @@ app.post('/checkout', async (req, res, next) => {
 
       return { book_ref: bRef.book_ref, waitList: true, tickets: [] }
     }
-    
+
     let tickets = []
 
-   
-    
 
-      
-      for (let pa in pass) {
 
-        let tick = await t.one('insert into ticket (${this:name}) values (${this:csv}) returning ticket_no', { book_ref: bRef.book_ref, passenger_id: pass[pa] })
-        queries.push(pg.as.format('insert into ticket (${this:name}) values (${this:csv}) returning ticket_no', { book_ref: bRef.book_ref, passenger_id: pass[pa] }))
-        await t.any('insert into ticket_flights (${this:name}) values(${this:csv})', { flight_id: vals.flightIDA, ticket_no: tick.ticket_no })
-        queries.push(pg.as.format('insert into ticket_flights (${this:name}) values(${this:csv})', { flight_id: vals.flightIDA, ticket_no: tick.ticket_no }))
 
-        tickets.push(tick.ticket_no)
-        
-      }
-    
-  return { tickets: tickets, waitList: false, book_ref: bRef.book_ref }
+
+    for (let pa in pass) {
+
+      let tick = await t.one('insert into ticket (${this:name}) values (${this:csv}) returning ticket_no', { book_ref: bRef.book_ref, passenger_id: pass[pa] })
+      queries.push(pg.as.format('insert into ticket (${this:name}) values (${this:csv}) returning ticket_no', { book_ref: bRef.book_ref, passenger_id: pass[pa] }))
+      await t.any('insert into ticket_flights (${this:name}) values(${this:csv})', { flight_id: vals.flightIDA, ticket_no: tick.ticket_no })
+      queries.push(pg.as.format('insert into ticket_flights (${this:name}) values(${this:csv})', { flight_id: vals.flightIDA, ticket_no: tick.ticket_no }))
+
+      tickets.push(tick.ticket_no)
+
+    }
+
+    return { tickets: tickets, waitList: false, book_ref: bRef.book_ref }
   }).then(data => {
-    
+
     if (data.waitList || req.body.flightIDB === '')
       res.send(data)
     else {
       db.tx(async t => {
         let vals = req.body
         let resFlightB
-          resFlightB = await t.any('update avail_seats set $1:raw=$1:raw-$2,$3:raw=$3:raw+$2 where flight_id=$4 and $1:raw>0 returning flight_id', ['avail_' + vals.econ, vals.child + vals.infant + vals.adult, 'total_' + vals.econ, parseInt(vals.flightIDB)])
-          queries.push(pg.as.format('update avail_seats set $1:raw=$1:raw-$2,$3:raw=$3:raw+$2 where flight_id=$4 and $1:raw>0 returning flight_id', ['avail_' + vals.econ, vals.child + vals.infant + vals.adult, 'total_' + vals.econ, parseInt(vals.flightIDB)]))
-          
-          if(resFlightB.length===0){
-            await t.any('insert into waitlist (flight_id,book_ref) values($1,$2)', [parseInt(vals.flightIDB), data.book_ref]) 
-            queries.push(pg.as.format('insert into waitlist (flight_id,book_ref) values($1,$2)', [parseInt(vals.flightIDB), data.book_ref]))
-            return {book_ref: data.book_ref, waitList: true, tickets: [] }
-          }
-          for(f in data.tickets){
-            
-              await t.any('insert into ticket_flights (${this:name}) values(${this:csv})', { flight_id: vals.flightIDB, ticket_no: data.tickets[f] })
-              queries.push(pg.as.format('insert into ticket_flights (${this:name}) values(${this:csv})', { flight_id: vals.flightIDB, ticket_no: data.tickets[f] }))
-            
-          }
-          return {waitList:false,book_ref:data.book_ref,tickets:data.tickets}
+        resFlightB = await t.any('update avail_seats set $1:raw=$1:raw-$2,$3:raw=$3:raw+$2 where flight_id=$4 and $1:raw>0 returning flight_id', ['avail_' + vals.econ, vals.child + vals.infant + vals.adult, 'total_' + vals.econ, parseInt(vals.flightIDB)])
+        queries.push(pg.as.format('update avail_seats set $1:raw=$1:raw-$2,$3:raw=$3:raw+$2 where flight_id=$4 and $1:raw>0 returning flight_id', ['avail_' + vals.econ, vals.child + vals.infant + vals.adult, 'total_' + vals.econ, parseInt(vals.flightIDB)]))
 
-      }).then(data=>res.send(data)).catch(e=>{console.log(e);next(e)})
+        if (resFlightB.length === 0) {
+          await t.any('insert into waitlist (flight_id,book_ref) values($1,$2)', [parseInt(vals.flightIDB), data.book_ref])
+          queries.push(pg.as.format('insert into waitlist (flight_id,book_ref) values($1,$2)', [parseInt(vals.flightIDB), data.book_ref]))
+          return { book_ref: data.book_ref, waitList: true, tickets: [] }
+        }
+        for (f in data.tickets) {
+
+          await t.any('insert into ticket_flights (${this:name}) values(${this:csv})', { flight_id: vals.flightIDB, ticket_no: data.tickets[f] })
+          queries.push(pg.as.format('insert into ticket_flights (${this:name}) values(${this:csv})', { flight_id: vals.flightIDB, ticket_no: data.tickets[f] }))
+
+        }
+        return { waitList: false, book_ref: data.book_ref, tickets: data.tickets }
+
+      }).then(data => res.send(data)).catch(e => { console.log(e); next(e) })
     }
   }).catch(e => { console.log(e); next(e) })
 
-  
+
 })
 
 app.get('/checkout', (req, res, next) => {
@@ -184,65 +190,28 @@ app.get('/checkout', (req, res, next) => {
   seats = parseInt(seats)
   flightIDA = parseInt(flightIDA)
   let query = `SELECT price,d.city as dc,a.city as ac, d.st_coun as ds,a.st_coun as as,scheduled_departure, scheduled_arrival, d.airport_code as airA,a.airport_code as airB,st.airport_code as airC,s.duration,price,scheduled_departure,scheduled_arrival FROM flights f inner join airport d on d.airport_code=f.departure_airport inner join airport a on a.airport_code=f.arrival_airport left join stops s on f.flight_id=s.flight_id left join airport st on s.air_code=st.airport_code inner join avail_seats se on se.flight_id=f.flight_id WHERE f.flight_id=$1 and avail_${econ}-$2>0`
+  queries.push(pg.as.format(query, [flightIDA, seats]))
   db.task(async t => {
     const a = await t.any(query, [flightIDA, seats])
     if (flightIDB) {
       const b = await t.any(query, [flightIDB, seats])
+      queries.push(pg.as.format(query, [flightIDB, seats]))
       return { a, b }
     }
     return { a }
   }).then(resu => {
     res.send([resu.a, resu.b ? resu.b : []])
   }).catch(e => next(e))
-  // pool.connect((err, client, release) => {
 
-  //   if (err)
-  //     return next(err)
-  //   async.parallel([
-  //     function (callback) {
-  //       client.query(query, [flightIDA, seats], (err, result) => {
-
-  //         callback(err, result)
-
-  //       })
-  //     }, function (callback) {
-  //       if (flightIDB) {
-
-  //         client.query(query, [parseInt(flightIDB), seats], (err, res) => {
-  //           callback(err, res)
-  //         })
-  //       }
-  //       else
-  //         callback(err, { rows: [] })
-  //     }], function callbackFunc(err, result) {
-  //       release()
-  //       if (err)
-  //         return next(err)
-
-  //       const resu = [result[0].rows, result[1].rows]
-  //       res.send(resu)
-
-
-  //     })
-  // })
 })
 
 app.get('/promos', async (req, res, next) => {
   db.task(async t => {
     const x = await t.any('select discount from promos where promo_code=$1', [req.query.code])
+    queries.push(pg.as.format('select discount from promos where promo_code=$1', [req.query.code]))
     return { x }
   }).then(resu => res.send(resu.x)).catch(e => next(e))
-  // const client = await pool.connect()
-  // try {
-  //   const data = await client.query('select discount from promos where promo_code=$1', [req.query.code])
-  //   res.send(data.rows)
-  // }
-  // catch (e) {
-  //   next(e)
-  // }
-  // finally {
-  //   client.release()
-  // }
+
 })
 app.get('/search', (req, res, next) => {
 
@@ -285,10 +254,12 @@ WHERE
 d.city=$1 and
 a.city=$2 and d.st_coun=$3 and a.st_coun=$4
 and scheduled_departure::date=$5 and avail_${econ}-$6>0`
+  queries.push(pg.as.format(query, vals))
   db.task(async t => {
     const a = await t.any(query, vals)
     if (dateTo) {
       const b = await t.any(query, [to[0], from[0], to[1], from[1], dateTo, parseInt(seats)])
+      queries.push(pg.as.format(query, [to[0], from[0], to[1], from[1], dateTo, parseInt(seats)]))
       return { a, b }
     }
     return { a }

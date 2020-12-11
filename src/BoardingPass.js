@@ -3,6 +3,10 @@ import { Card, Image, Row, Col, Alert } from 'react-bootstrap'
 import logo from './favicon.ico'
 
 class BoardingPass extends React.Component {
+    constructor(props) {
+        super(props)
+        
+    }
     render() {
         return (
             <div >
@@ -17,22 +21,19 @@ class BoardingPass extends React.Component {
                             Flights
                         </Card.Header>
                     <Card.Body style={{ backgroundColor: '#f7fafc' }}>
-                        <Card.Title>ECONOMY</Card.Title>
+
 
                         <Row>
+
                             <Col md={4}>
-                                PASSENGER NAME
-                                    <h5>SHEHZMAN</h5>
-                            </Col>
-                            <Col md={3}>
                                 FLIGHT
-                                    <h5>OKL012</h5>
+                                    <h5>{this.props.data.flightID}</h5>
                             </Col>
-                            <Col md={3}>
+                            <Col md={4}>
                                 TICKET NO
-                                    <h5>312</h5>
+                                    <h5>{this.props.data.ticketNo}</h5>
                             </Col>
-                            <Col md={2}>
+                            <Col md={4}>
                                 SEAT
                                     <h5>18B</h5>
                             </Col>
@@ -41,28 +42,28 @@ class BoardingPass extends React.Component {
                         <Row>
                             <Col md={12}>
                                 FROM:
-                                    <h6 style={{ display: 'inline', marginLeft: '4px' }}>LAX</h6>
+                                    <h6 style={{ display: 'inline', marginLeft: '4px' }}>{this.props.data.depart}</h6>
                             </Col>
                         </Row>
                         <Row>
                             <Col style={{ marginBottom: '7px' }} md={12}>
                                 TO:
-                                    <h6 style={{ display: 'inline', marginLeft: '4px' }}>MIA</h6>
+                                    <h6 style={{ display: 'inline', marginLeft: '4px' }}>{this.props.data.arr}</h6>
                             </Col>
                         </Row>
 
                         <Row>
                             <Col md={4}>
                                 GATE
-                                    <h5>47</h5>
+                                    <h5>{Math.floor(Math.random()*50) }</h5>
                             </Col>
                             <Col md={4}>
                                 BOARDING TIME
-                                    <h5>11:30</h5>
+                                    <h5>{this.props.data.date}</h5>
                             </Col>
                             <Col md={4}>
                                 BAGGAGE CLAIM NO
-                                    <h5>5C</h5>
+                             <h5>{Math.floor(Math.random()*10) }C</h5>
                             </Col>
                         </Row>
 

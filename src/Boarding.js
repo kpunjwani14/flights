@@ -4,6 +4,9 @@ import { Form, Row, Col, Button, Card } from 'react-bootstrap';
 import BoardingModal from './BoardingModal';
 
 class Boarding extends React.Component {
+    constructor(props){
+        super(props)
+    }
     render() {
         return (
             <div>
