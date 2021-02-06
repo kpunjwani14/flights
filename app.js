@@ -2,12 +2,13 @@
 const { Pool } = require('pg')
 let queries = []
 var cors = require('cors')
-const pg = require('pg-promise')()
+const pg = require('pg-promise')({ schema: 'ajfgo1' })
 const db = pg({
-  user: 'cosc0233',
-  password: '1793992PK',
+  user: 'cosc0232',
+  password: '1677335YS',
   host: 'code.cs.uh.edu',
-  database: 'COSC3380'
+  database: 'COSC3380',
+
 });
 
 const express = require('express')
@@ -36,11 +37,11 @@ app.get('/queries', (req, res) => {
   res.send(queries)
 })
 app.post('/checkin', async (req, res, next) => {
-  
+
   let body = req.body
   db.task(async t => {
     let check = await db.any('select scheduled_departure,departure_airport,arrival_airport from ticket_flights t inner join flights f ON t.flight_id = f.flight_id where ticket_no=$1 and f.flight_id=$2 ', [parseInt(body.ticketNo), body.flightID])
-    
+
     if (check.length === 0)
       return { found: false }
     else
@@ -49,7 +50,7 @@ app.post('/checkin', async (req, res, next) => {
 
 
 
-  }).then(data =>res.send(data)).catch(e => {console.log(e);next(e)})
+  }).then(data => res.send(data)).catch(e => { console.log(e); next(e) })
 })
 app.post('/checkout', async (req, res, next) => {
   let vals = req.body

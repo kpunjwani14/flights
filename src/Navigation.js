@@ -21,7 +21,7 @@ class Navigation extends React.Component {
                         <Nav.Link href="./">Book</Nav.Link>
                         <Nav.Link href="/checkin">Check-in</Nav.Link>
                         <Nav.Link href="/erd">ERD</Nav.Link>
-                        <Nav.Link href="http://localhost:3002/queries">Queries</Nav.Link>
+                        <Nav.Link href="http://localhost:7000/queries">Queries</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>)
